@@ -16,7 +16,7 @@
     <RootNamespace>AMS.API</RootNamespace>
     <AssemblyName>AMS.API</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -77,6 +77,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -86,6 +90,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -93,6 +101,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="XCU.Common.DBHelper">
+      <HintPath>..\..\..\..\Projects\InternalProductRepository\XInsure\packages\Xceedance.Common.Utilities\XCU.Common.DBHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="XCU.Common.Encryption">
+      <HintPath>..\..\..\..\Projects\InternalProductRepository\XInsure\packages\Xceedance.Common.Utilities\XCU.Common.Encryption.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -110,12 +124,94 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Contracts\IAssessorCommunicationDetailDbService.cs" />
+    <Compile Include="Contracts\IAssessorDemographicDbService.cs" />
+    <Compile Include="Contracts\IAssessorIdProofDetailDbService.cs" />
+    <Compile Include="Contracts\IAssessorJobRoleDbService.cs" />
+    <Compile Include="Contracts\IAssessorOtherDetailDbService.cs" />
+    <Compile Include="Contracts\IAssessorPersonalDetailDbService.cs" />
+    <Compile Include="Contracts\IAssessorPreferredLocationDbService.cs" />
+    <Compile Include="Contracts\IBatchAllocationDbService.cs" />
+    <Compile Include="Contracts\IBatchMasterDbService.cs" />
+    <Compile Include="Contracts\IGeographyDbService.cs" />
+    <Compile Include="Contracts\ISchemeDbService.cs" />
+    <Compile Include="Contracts\IVocationalTrainingProviderDbService.cs" />
+    <Compile Include="Contracts\ISkillCouncilDbService.cs" />
+    <Compile Include="Contracts\IJobRolesDbService.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\BatchAllocationController.cs" />
+    <Compile Include="Controllers\BatchMasterController.cs" />
+    <Compile Include="Controllers\GeographyController.cs" />
+    <Compile Include="Controllers\SchemeController.cs" />
+    <Compile Include="Controllers\VocationalTrainingProviderController.cs" />
+    <Compile Include="Controllers\SkillCouncilController.cs" />
+    <Compile Include="Controllers\JobRolesController.cs" />
+    <Compile Include="Core\AssessorCommunicationDetailDbService.cs" />
+    <Compile Include="Core\AssessorDemographicDbService.cs" />
+    <Compile Include="Core\AssessorIdProofDetailDbService.cs" />
+    <Compile Include="Core\AssessorJobRoleDbService.cs" />
+    <Compile Include="Core\AssessorOtherDetailDbService.cs" />
+    <Compile Include="Core\AssessorPersonalDetailDbService.cs" />
+    <Compile Include="Core\AssessorPreferredLocationDbService.cs" />
+    <Compile Include="Core\BaseDbService.cs" />
+    <Compile Include="Core\BatchAllocationDbService.cs" />
+    <Compile Include="Core\GeographyDbService.cs" />
+    <Compile Include="Core\JobRolesDbService.cs" />
+    <Compile Include="Core\BatchMasterDbService.cs" />
+    <Compile Include="Core\SchemeDbService.cs" />
+    <Compile Include="Core\VocationalTrainingProviderDbService.cs" />
+    <Compile Include="Core\SkillCouncilDbService.cs" />
+    <Compile Include="DTO\Assessor\Assessor.cs" />
+    <Compile Include="DTO\Assessor\AssessorCommunicationDetails.cs" />
+    <Compile Include="DTO\Assessor\AssessorIdProofDetailRequestParams.cs" />
+    <Compile Include="DTO\Assessor\AssessorIdProofDetails.cs" />
+    <Compile Include="DTO\Assessor\AssessorJobRole.cs" />
+    <Compile Include="DTO\Assessor\AssessorJobRoleRequestParams.cs" />
+    <Compile Include="DTO\Assessor\AssessorJobRolesClientStatus.cs" />
+    <Compile Include="DTO\Assessor\AssessorOtherDetails.cs" />
+    <Compile Include="DTO\Assessor\AssessorPerosnalDetails.cs" />
+    <Compile Include="DTO\Assessor\AssessorPreferredLocation.cs" />
+    <Compile Include="DTO\Assessor\AssessorPreferredLocationRequestParams.cs" />
+    <Compile Include="DTO\Assessor\AssessorRequestParams.cs" />
+    <Compile Include="DTO\Assessor\AssessorResponse.cs" />
+    <Compile Include="DTO\Assessor\CommunicationDetailsResponse.cs" />
+    <Compile Include="DTO\Assessor\IdProofDetailsResponse.cs" />
+    <Compile Include="DTO\Assessor\JobRolesResponse.cs" />
+    <Compile Include="DTO\Assessor\OtherDetailsResponse.cs" />
+    <Compile Include="DTO\Assessor\PersonalDetailsResponse.cs" />
+    <Compile Include="DTO\Assessor\PreferredLocationsResponse.cs" />
+    <Compile Include="DTO\Assessor\SearchAssessorRequestParams.cs" />
+    <Compile Include="DTO\BatchAllocation\BatchAllocation.cs" />
+    <Compile Include="DTO\BatchMaster\BatchDetail.cs" />
+    <Compile Include="DTO\BatchMaster\BatchMaster.cs" />
+    <Compile Include="DTO\BatchMaster\BatchMasterRequestParams.cs" />
+    <Compile Include="DTO\BatchMaster\BatchMasterResponse.cs" />
+    <Compile Include="DTO\BatchMaster\SearchBatchMasterRequestParams.cs" />
+    <Compile Include="DTO\Geography\City.cs" />
+    <Compile Include="DTO\Geography\GeographyRequestParams.cs" />
+    <Compile Include="DTO\Geography\GeographyResponse.cs" />
+    <Compile Include="DTO\Geography\State.cs" />
+    <Compile Include="DTO\JobRole\JobRole.cs" />
+    <Compile Include="DTO\JobRole\JobRoleRequestParams.cs" />
+    <Compile Include="DTO\JobRole\JobRoleResponse.cs" />
+    <Compile Include="DTO\JobRole\SearchJobRolesRequestParams.cs" />
+    <Compile Include="DTO\OperationStatus.cs" />
+    <Compile Include="DTO\Scheme\Scheme.cs" />
+    <Compile Include="DTO\Scheme\SchemeRequestParams.cs" />
+    <Compile Include="DTO\Scheme\SchemeResponse.cs" />
+    <Compile Include="DTO\SkillCouncil\SkillCouncil.cs" />
+    <Compile Include="DTO\SkillCouncil\SkillCouncilRequestParams.cs" />
+    <Compile Include="DTO\SkillCouncil\SkillCouncilResponse.cs" />
+    <Compile Include="DTO\VTP\VocationalTrainingProviderResponse.cs" />
+    <Compile Include="DTO\VTP\VocationalTrainingProviderRequestParams.cs" />
+    <Compile Include="DTO\VTP\VocationalTrainingProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -126,6 +222,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\AMS.API.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -135,9 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="Core\" />
-    <Folder Include="DomainModels\" />
+    <Folder Include="DTO\SkillCouncilType\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
@@ -155,7 +250,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50303</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60983/</IISUrl>
+          <IISUrl>http://localhost/AMS.Services</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

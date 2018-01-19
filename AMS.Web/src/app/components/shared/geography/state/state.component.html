@@ -1,0 +1,9 @@
+<select class="form-control field-sm" 
+name="ddl_State" id="ddl_State" 
+[(ngModel)]="stateId" (ngModelChange)="onItemChange($event)"
+#ddl_State="ngModel" required>
+<option [value]="null" selected="selected" disabled>Select</option>
+<option *ngFor="let state of states" value="{{state.Id}}">
+  {{state.Name}}
+</option>
+</select>

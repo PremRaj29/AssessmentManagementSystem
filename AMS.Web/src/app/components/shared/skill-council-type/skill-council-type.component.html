@@ -1,0 +1,8 @@
+<select class="form-control field-sm" name="ddl_CouncilType" id="ddl_CouncilType" 
+[(ngModel)]='councilType' (ngModelChange)="onItemChange($event)" #ddl_CouncilType="ngModel" required>
+  <option value="0"  disabled>Select</option>
+  <option value="1">Sector Skill Council(SSC)</option>
+  <option value="2">School</option>
+</select>
+
+<!-- <p>{{councilType}}</p> -->

@@ -1,0 +1,51 @@
+/*model popup css
+    start region
+*/
+
+/* The Modal (background) */
+.modal {
+    
+    display: none; /* Hidden by default */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */    
+}
+
+/* Modal Content */
+.modal-content {    
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 90%;
+
+    /* additional styles */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.evalutor {
+    border: 1px solid black;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}

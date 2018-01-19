@@ -1,0 +1,9 @@
+<select class="form-control field-sm" 
+name="ddl_Scheme" id="ddl_Scheme" 
+[(ngModel)]="schemeId" (ngModelChange)="onItemChange($event)"
+#ddl_Scheme="ngModel" required>
+<option [value]="null" selected="selected" disabled>Select</option>
+<option *ngFor="let scheme of schemes" value="{{scheme.Id}}">
+  {{scheme.Name}}
+</option>
+</select>

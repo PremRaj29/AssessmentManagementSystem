@@ -1,0 +1,9 @@
+import { OperationType } from './operation-type.enum';
+
+export class AffectedId
+{
+    DTOName: string;     		 // Contact, Exposure, Modifier, etc...
+    DTOProperty: string;		 // ContactId, ExposureId, ModifierId, etc...
+    IdValue: string;     		 // 1,2,3, a,b,c etc...
+    OperationType: OperationType; // POST, PUT, GET, DELETE enums
+}

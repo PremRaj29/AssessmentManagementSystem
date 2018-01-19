@@ -1,0 +1,11 @@
+<select class="form-control field-sm" 
+  name="ddl_SkillCouncil" id="ddl_SkillCouncil" 
+  [(ngModel)]="skillCouncilId" (ngModelChange)="onItemChange($event)"
+  #ddl_SkillCouncil="ngModel" required>
+  <option [value]="null" selected="selected" disabled>Select</option>
+  <option *ngFor="let skillCouncil of skillCouncils" value="{{skillCouncil.Id}}">
+    {{skillCouncil?.FullName}}
+  </option>
+</select>
+
+<!-- <p>Child Comp :{{skillCouncilId}}</p> -->

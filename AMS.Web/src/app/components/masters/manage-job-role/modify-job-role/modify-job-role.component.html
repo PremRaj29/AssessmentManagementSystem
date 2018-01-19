@@ -1,0 +1,131 @@
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
+        <h3 class="content-header-title">Modify Job Role</h3>
+      </div>
+      <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
+        <div class="breadcrumb-wrapper col-xs-12 pl-0">
+          <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
+            <li class="breadcrumb-item">
+              <a routerLink="../../">DASHBOARD</a>
+            </li>
+            <li class="breadcrumb-item active">Add Job Role</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+      <!-- Analytics spakline & chartjs  -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+          <div class="card form-card form-advance-block new-customer">
+            <div class="card-block">
+              <form class="form form-horizontal" action="#">
+                <div class="form-advance-block">
+                  <div class="card collapse-icon accordion-icon-rotate">
+                    <div class="card-block">
+                      <div class="card-body">
+                        <div class="">
+                          <div class="form-group row">
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control" style="color:green" 
+                                *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+                          </div>
+                          <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control" style="font-weight:bold">ReadOnly Mode</label>
+                              <div class="col-md-6 col-lg-1">
+                                  <input type="checkbox" id="cb_readOnly" name="cb_readOnly" [(ngModel)]="isReadOnlyMode" (ngModelChange)="readOnlyModeChanged()" />
+                              </div>
+                          </div>
+                          <fieldset [disabled]="isReadOnlyMode == 1">
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">Skill Council Type</label>
+                            <div class="col-md-6 col-lg-5">
+                              <app-skill-council-type [setSelectedCouncilType]="jobRole.SkillCouncilTypeId" 
+                                (selectedCouncilType)="councilTypeChanged($event)">Loading..
+                              </app-skill-council-type>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && jobRole.SkillCouncilTypeId == 0)">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-2">
+                              <span class="error">Council type is required</span>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">Skill Council Name</label>
+                            <div class="col-md-6 col-lg-5">
+                              <app-skill-council [skillCouncilTypeId]="jobRole.SkillCouncilTypeId" 
+                              [skillCouncilId]="jobRole.SkillCouncilId" 
+                              (selectedSkillCouncil)="skillCouncilChanged($event)">Loading..</app-skill-council>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && (jobRole.SkillCouncilId == null || jobRole.SkillCouncilId == 0))">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-2">
+                              <span class="error">{{jobRole.SkillCouncilId}} SkillCouncil is required</span>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">JobRole Code</label>
+                            <div class="col-md-6 col-lg-5">
+                              <input type="text" name="txt_JobRoleCode" id="txt_JobRoleCode" [(ngModel)]="jobRole.Code" class="form-control field-sm" placeholder=""
+                                ng-maxlength="10" maxlength="10" #txt_JobRoleCode="ngModel" required>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && !txt_JobRoleCode.valid)">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-2">
+                              <span class="error">JobRole code is required</span>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">JobRole Name</label>
+                            <div class="col-md-6 col-lg-5">
+                              <input type="text" name="txt_JobRoleName" id="txt_JobRoleName" [(ngModel)]="jobRole.Name" class="form-control field-lg" placeholder=""
+                                value="" ng-maxlength="250" maxlength="250" #txt_JobRoleName="ngModel" required>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && !txt_JobRoleName.valid)">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-2">
+                              <span class="error">JobRole name is required</span>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">JobRole Description</label>
+                            <div class="col-md-6 col-lg-5">
+                              <textarea name="txt_JobRoleDescription" id="txt_JobRoleDescription" [(ngModel)]="jobRole.Description" class="form-control field-lg"
+                                placeholder="" value="" ng-maxlength="500" maxlength="500"></textarea>
+                            </div>
+                          </div>                          
+                            <!-- <div>{{jobRole | json }}</div>            -->
+                            </fieldset>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-lg-3 label-control"></label>
+                                <div class="col-md-6 col-lg-5 text-right">
+                                  <div class="field-lg" *ngIf="isReadOnlyMode == 1">
+                                    <a href="javascript:void(0)" class="btn btn-outline-primary search-quote" (click)="formSubmitted = true; deleteJobRole()">
+                                      <i class="ft-refresh-ccw mr-half"></i> Delete </a>
+                                  </div>
+                                  <div class="field-lg" *ngIf="isReadOnlyMode == 0">
+                                      <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; modifyJobRole();">
+                                        <i class="ft-search mr-half"></i> Modify </a>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

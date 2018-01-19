@@ -1,0 +1,7 @@
+<select class="form-control field-sm" name="ddl_City" id="ddl_City" 
+  [(ngModel)]="cityId" (ngModelChange)="onItemChange($event)" #ddl_City="ngModel" required>
+  <option [value]="null" selected="selected" disabled>{{defaultDDL_Option}}</option>
+  <option *ngFor="let city of cities" value="{{city?.Id}}">
+    {{city?.Name}}
+  </option>
+</select>

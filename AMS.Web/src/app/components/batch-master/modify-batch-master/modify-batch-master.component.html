@@ -1,0 +1,278 @@
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
+        <h3 class="content-header-title">Add Batch-Master</h3>
+      </div>
+      <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
+        <div class="breadcrumb-wrapper col-xs-12 pl-0">
+          <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
+            <li class="breadcrumb-item">
+              <a routerLink="../../">DASHBOARD</a>
+            </li>
+            <li class="breadcrumb-item active">Add Batch-Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+      <!-- Analytics spakline & chartjs  -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+          <div class="card form-card form-advance-block new-customer">
+            <div class="card-block">
+              <form class="form form-horizontal" action="#">
+                <div class="form-advance-block">
+                  <div class="card collapse-icon accordion-icon-rotate">
+                    <div class="card-block">
+                      <div class="card-body">
+                        <div class="">
+                          <div class="form-group row">
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control" style="color:green" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control" style="font-weight:bold">ReadOnly Mode</label>
+                            <div class="col-md-6 col-lg-1">
+                              <input type="checkbox" id="cb_readOnly" name="cb_readOnly" [(ngModel)]="isReadOnlyMode" (ngModelChange)="readOnlyModeChanged()"
+                              />
+                            </div>
+                          </div>
+                          <fieldset [disabled]="isReadOnlyMode == 1">
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">
+                                <h5> Primary Details </h5>
+                              </label>
+                              <div class="col-md-3">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Batch Id</label>
+                              <div class="col-md-6 col-lg-5">
+                                <input type="text" name="txt_BatchId" id="txt_BatchId" [(ngModel)]="batchMaster.BatchId" class="form-control field-sm" placeholder=""
+                                  ng-maxlength="10" maxlength="10" #txt_BatchId="ngModel" required>
+                              </div>
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchId == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-2">
+                                <span class="error">Batch Id is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Batch Name</label>
+                              <div class="col-md-6 col-lg-5">
+                                <input type="text" name="txt_BatchName" id="txt_BatchName" [(ngModel)]="batchMaster.BatchName" class="form-control field-sm"
+                                  placeholder="" ng-maxlength="100" maxlength="100" #txt_BatchName="ngModel" required>
+                              </div>
+                            </div>
+                            <hr />
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">
+                                <h5> Secondary Details </h5>
+                              </label>
+                              <div class="col-md-3">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Skill Council Type</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-skill-council-type [setSelectedCouncilType]="batchMaster.BatchDetails.SkillCouncilTypeId" (selectedCouncilType)="councilTypeChanged($event)">Loading..
+                                </app-skill-council-type>
+                              </div>
+                              SSC_Id : {{batchMaster.BatchDetails.SkillCouncilTypeId}}
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Skill Council Name</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-skill-council [skillCouncilTypeId]="batchMaster.BatchDetails.SkillCouncilTypeId" [skillCouncilId]="batchMaster.BatchDetails.SkillCouncilId"
+                                  (selectedSkillCouncil)="skillCouncilChanged($event)">Loading..</app-skill-council>
+                              </div>
+                              TypeId : {{batchMaster.BatchDetails.SkillCouncilId}}
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Job Role</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-job-role [skillCouncilTypeId]="batchMaster.BatchDetails.SkillCouncilTypeId" [skillCouncilId]="batchMaster.BatchDetails.SkillCouncilId"
+                                  [jobRoleId]="batchMaster.BatchDetails.JobRoleId" (selectedJobRole)="jobRoleChanged($event)">
+                                  Loading..</app-job-role>
+                              </div>
+                              JR_Id : {{batchMaster.BatchDetails.JobRoleId}}
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchDetails.JobRoleId == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-2">
+                                <span class="error">Job Role is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Scheme</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-scheme [schemeId]="batchMaster.BatchDetails.SchemeId" (selectedScheme)="schemeChanged($event)">
+                                  Loading..</app-scheme>
+                              </div>
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchDetails.SchemeId == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-2">
+                                <span class="error">Scheme is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">VTP Name</label>
+                              <div class="col-md-6 col-lg-5">
+                                <!-- <app-vtp [vtpId]="batchMaster.BatchDetails.VTP_Id" (selectedVtp)="vtpChanged($event)">
+                                  Loading..</app-vtp> -->
+                              </div>
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchDetails.VTP_Id == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-2">
+                                <span class="error">VTP is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">State</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-state [stateId]="batchMaster.BatchDetails.StateId" (selectedState)="stateChanged($event)">
+                                  Loading..</app-state>
+                              </div>
+                              StateId : {{batchMaster.BatchDetails.StateId}}
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">City</label>
+                              <div class="col-md-6 col-lg-5">
+                                <app-city [stateId]="batchMaster.BatchDetails.StateId" [cityId]="batchMaster.BatchDetails.CityId" (selectedCity)="cityChanged($event)">
+                                  Loading..</app-city>
+                              </div>
+                              CityId : {{batchMaster.BatchDetails.CityId}}
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchDetails.CityId == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-2">
+                                <span class="error">City is required</span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Total Candidates</label>
+                              <div class="col-md-1">
+                                <input type="number" name="txt_TotalCandidates" id="txt_TotalCandidates" class="form-control field-lg" placeholder="" [(ngModel)]="batchMaster.BatchDetails.TotalCandidates"
+                                  value="" #txt_TotalCandidates="ngModel" min="1" max="999" required>
+                              </div>
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && batchMaster.BatchDetails.TotalCandidates == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-3">
+                                <span class="error">Total Candidates is required</span>
+                              </div>
+                            </div>
+                            <hr />
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">
+                                <h5> VTP Details </h5>
+                              </label>
+                              <div class="col-md-3">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Name</label>
+                              <div class="col-md-6 col-lg-5">
+                                <input type="text" name="txt_VtpSpocName" id="txt_VtpSpocName" [(ngModel)]="batchMaster.BatchDetails.VTP_SPOC_Name" class="form-control field-lg"
+                                  placeholder="" value="" #txt_VtpSpocName="ngModel" ng-maxlength="250" maxlength="250">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Email</label>
+                              <div class="col-md-6 col-lg-4">
+                                <input type="text" name="txt_VtpSpocEmail" id="txt_VtpSpocEmail" [(ngModel)]="batchMaster.BatchDetails.VTP_SPOC_Email" class="form-control field-lg"
+                                  placeholder="" value="" #txt_VtpSpocEmail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                  ng-maxlength="150" maxlength="150">
+                              </div>
+                            </div>
+                            <div class="form-group row" *ngIf="(formSubmitted && !txt_VtpSpocEmail.hasError('pattern'))">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-6 col-lg-3">
+                                <span class="alert alert-danger">
+                                  Email format should be
+                                  <small>
+                                    <b>joe@abc.com</b>
+                                  </small>
+                                </span>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Mobile</label>
+                              <div class="col-md-6 col-lg-2">
+                                <input type="text" name="txt_VtpSpocMobile" id="txt_VtpSpocMobile" class="form-control field-lg" placeholder="" [(ngModel)]="batchMaster.BatchDetails.VTP_SPOC_Mobile"
+                                  value="" #txt_VtpSpocMobile="ngModel" ng-minlength="10" minlength="10" ng-maxlength="10"
+                                  maxlength="10" pattern="[0-9]*">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">VTP Address</label>
+                              <div class="col-md-6 col-lg-5">
+                                <textarea name="txt_VtpAddress" id="txt_VtpAddress" [(ngModel)]="batchMaster.BatchDetails.VTP_Address" class="form-control field-lg"
+                                  placeholder="" value="" ng-maxlength="500" maxlength="500"></textarea>
+                              </div>
+                            </div>
+                            <hr />
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">
+                                <h5> Centre SPOC Details </h5>
+                              </label>
+                              <div class="col-md-3">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Name</label>
+                              <div class="col-md-6 col-lg-5">
+                                <input type="text" name="txt_CentreSpocName" id="txt_CentreSpocName" [(ngModel)]="batchMaster.BatchDetails.Centre_SPOC_Name"
+                                  class="form-control field-lg" placeholder="" value="" #txt_CentreSpocName="ngModel" ng-maxlength="250"
+                                  maxlength="250">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Email</label>
+                              <div class="col-md-6 col-lg-4">
+                                <input type="text" name="txt_CentreSpocEmail" id="txt_CentreSpocEmail" [(ngModel)]="batchMaster.BatchDetails.Centre_SPOC_Email"
+                                  class="form-control field-lg" placeholder="" value="" #txt_CentreSpocEmail="ngModel" ng-maxlength="150"
+                                  maxlength="150">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">SPOC Mobile</label>
+                              <div class="col-md-6 col-lg-2">
+                                <input type="text" name="txt_CentreSpocMobile" id="txt_CentreSpocMobile" [(ngModel)]="batchMaster.BatchDetails.Centre_SPOC_Mobile"
+                                  class="form-control field-lg" placeholder="" value="" #txt_CentreSpocMobile="ngModel" ng-maxlength="10"
+                                  maxlength="10">
+                              </div>
+                            </div>
+                          </fieldset>
+                          <!-- Comment : Here Form Data Submission Panel -->
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-5 text-right">
+                              <div class="field-lg" *ngIf="isReadOnlyMode == 0">
+                                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; modifyBatchMaster();">
+                                  <i class="ft-search mr-half"></i>Modify </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

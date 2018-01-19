@@ -1,0 +1,9 @@
+<select class="form-control field-sm" 
+  name="ddl_JobRole" id="ddl_JobRole" 
+  [(ngModel)]="jobRoleId" (ngModelChange)="onItemChange($event)"
+  #ddl_JobRole="ngModel" required>
+  <option [value]="null" selected="selected" disabled>Select</option>
+  <option *ngFor="let jobRole of jobRoles" value="{{jobRole.Id}}">
+    {{jobRole.Name}} ({{jobRole.Code}})
+  </option>
+</select>

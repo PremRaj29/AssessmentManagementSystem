@@ -1,0 +1,9 @@
+<select class="form-control field-sm" 
+name="ddl_Vtp" id="ddl_Vtp" 
+[(ngModel)]="vtpId" (ngModelChange)="onItemChange($event)"
+#ddl_Vtp="ngModel" required>
+<option [value]="null" selected="selected" disabled>Select</option>
+<option *ngFor="let vtp of vtps" value="{{vtp.Id}}">
+  {{vtp?.Name}}
+</option>
+</select>
