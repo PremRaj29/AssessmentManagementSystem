@@ -96,6 +96,7 @@ export class BatchMasterComponent implements OnInit {
   //#region event handlers methods
 
   public searchBatchMaster() {
+    debugger;
     this.childCompListofBatchMaster.searchBatchMaster(this.searchParams);
   }
 

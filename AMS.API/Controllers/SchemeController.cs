@@ -28,6 +28,13 @@ namespace AMS.API.Controllers
             return Ok(GetSchemeDbService().GetScheme(new SchemeRequestParams() { Id = schemeId }));
         }
 
+        //Get: SearchScheme
+        [Route("Scheme/Search")]
+        public IHttpActionResult GetSearchedSchemes(string schemeCode, string schemeName)
+        {
+            return Ok(GetSchemeDbService().SearchSchemes(schemeCode,schemeName));
+        }
+
         //Post: Scheme
         /// <summary>
         /// Create/Add new Scheme
@@ -91,7 +98,7 @@ namespace AMS.API.Controllers
         /// <param name="schemeId"></param>
         /// <returns></returns>
         [Route("Scheme/{schemeId}")]
-        public IHttpActionResult Delete(int schemeId = 0)
+        public IHttpActionResult Delete(int schemeId)
         {
             OperationStatus operationStatus = new OperationStatus() { ServiceMethod = "DELETE", ServiceName = "RemoveScheme", RequestProcessed = false, RequestSuccessful = false };
 

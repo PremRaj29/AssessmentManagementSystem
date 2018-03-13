@@ -9,11 +9,10 @@ import { AppRouterModule} from './app.routes';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BatchMasterModule } from './modules/batch-master.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule

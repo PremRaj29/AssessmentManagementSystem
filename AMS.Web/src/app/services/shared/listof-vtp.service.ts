@@ -9,6 +9,7 @@ import { VocationalTrainingProviderResponse } from '../../models/manage-vtp/vtp-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 // import Domain class
 
@@ -21,7 +22,7 @@ export class ListofVtpService {
   
     //#region global level propertie/variables/models declaration & initlizations
   
-    private vtpRequestUrl: string = 'http://localhost/AMS.Services/api/VocationalTrainingProvider/';
+    private vtpRequestUrl: string = environment.apiUrl + 'VocationalTrainingProvider/';
     private requestUrl: string = null;
     private requestOptions: RequestOptions;
   
@@ -36,7 +37,7 @@ export class ListofVtpService {
     getVtp(vtpId?: number) : Observable<VocationalTrainingProviderResponse>
     {
       debugger;
-      //reference-url : http://localhost/AMS.Services/VocationalTrainingProvider/2
+      //reference-url : http://{Path}/AMS.Services/VocationalTrainingProvider/2
   
       // comment : here manipulate url string
       this.requestUrl  = this.vtpRequestUrl + `${vtpId || '0'}`;

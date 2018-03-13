@@ -38,7 +38,13 @@ export class BatchDetailsComponent implements OnInit {
 
   //#region get methods
 
-  loadBatchMasterDetails(batchId: string = null,batchName: string = null) {
+  loadBatchMasterDetails(batchId: string = null,batchName: string = null) 
+  {
+    debugger;
+    this.batchMaster = new BatchMaster();
+    this.searchedBatchMasterId.emit(0);
+    this.isDataLoadingCompleted = false;
+
     // here get Question obserable
     let observable = this.batchMasterService.getBatchMasterDetailsV2(batchId,batchName);
 

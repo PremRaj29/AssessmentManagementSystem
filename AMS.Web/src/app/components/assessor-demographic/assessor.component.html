@@ -1,0 +1,116 @@
+<hr/>
+<div class="app-content content container-fluid">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
+                <h3 class="content-header-title">Search Assessor</h3>
+            </div>
+            <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
+                <div class="breadcrumb-wrapper col-xs-12 pl-0">
+                    <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
+                        <li class="breadcrumb-item">
+                            <a routerLink="../">DASHBOARD</a>
+                        </li>
+                        <li class="breadcrumb-item active">Search Assessor</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Analytics spakline & chartjs  -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="card form-card form-advance-block new-customer">
+                        <div class="card-block">
+                            <form class="form form-horizontal" action="#">
+                                <div class="form-advance-block">
+                                    <div class="card collapse-icon accordion-icon-rotate">
+                                        <div class="form-group">
+                                            <div class="col-sm-10 text-right">
+                                                    <a class="btn btn-outline" style="font-weight: bold" (click)="toggleAdvanceSearchPanel()">
+                                                            <i class="ft-refresh-ccw mr-half"></i> Advance Search </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="card-body">
+                                                <div class="">
+                                                    <div class="form-group row">
+                                                    </div>
+                                                    <div class="form-group row">                                                        
+                                                        <label class="col-md-2 col-lg-2 label-control">IRIS Id</label>
+                                                        <div class="col-md-4 col-lg-3">
+                                                            <input type="text" name="txt_IRIS_Id" id="txt_IRIS_Id" [(ngModel)]="searchParams.IRIS_Id" class="form-control" placeholder=""
+                                                                value="">
+                                                        </div>
+                                                        <label class="col-md-2 col-lg-2 label-control">AssessorName</label>
+                                                        <div class="col-md-4 col-lg-3">
+                                                            <input type="text" name="txt_Name" id="txt_Name" [(ngModel)]="searchParams.Name" class="form-control field-sm" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">                                                        
+                                                      <label class="col-md-2 col-lg-2 label-control">Email</label>
+                                                      <div class="col-md-4 col-lg-3">
+                                                          <input type="text" name="txt_Email" id="txt_Email" [(ngModel)]="searchParams.EmailId" class="form-control" placeholder=""
+                                                              value="">
+                                                      </div>
+                                                      <label class="col-md-2 col-lg-2 label-control">Mobile</label>
+                                                      <div class="col-md-4 col-lg-3">
+                                                          <input type="text" name="txt_Mobile" id="txt_Mobile" [(ngModel)]="searchParams.MobileNo" class="form-control field-sm" placeholder="">
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group row">                                                        
+                                                    <label class="col-md-2 col-lg-2 label-control">State</label>
+                                                    <div class="col-md-4 col-lg-3">
+                                                        <input type="text" name="txt_State" id="txt_State" [(ngModel)]="searchParams.StateId" class="form-control" placeholder=""
+                                                            value="">
+                                                    </div>
+                                                    <label class="col-md-2 col-lg-2 label-control">City</label>
+                                                    <div class="col-md-4 col-lg-3">
+                                                        <input type="text" name="txt_City" id="txt_City" [(ngModel)]="searchParams.CityId" class="form-control field-sm" placeholder="">
+                                                    </div>
+                                                </div>
+                                                    <div class="" *ngIf="showAdvanceSearchPanel">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 col-lg-2 label-control">Account Number</label>
+                                                            <div class="col-md-4 col-lg-3">
+                                                              <input type="text" name="txt_AccountNumber" id="txt_AccountNumber" [(ngModel)]="searchParams.AccountNumber" class="form-control" placeholder="" value="">
+                                                            </div>
+                                                            <label class="col-md-2 col-lg-2 label-control">Gender</label>
+                                                            <div class="col-md-4 col-lg-3">
+                                                              <select class="form-control field-sm" name="ddl_Gender" id="ddl_Gender" 
+                                                              [(ngModel)]='searchParams.Gender' #ddl_Gender="ngModel" required>
+                                                                <option value="null"  disabled>Select</option>
+                                                                <option value="M">Male</option>
+                                                                <option value="F">Female</option>
+                                                              </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- {{searchParams | json }} -->
+                                        </div>
+                                        <div class="form-group btn-grp advance-search-btns clearfix">
+                                            <div class="col-sm-10 text-right">
+                                                <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetSearchPanel()">
+                                                    <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                                                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="searchAssessors()">
+                                                    <i class="ft-search mr-half"></i>Search </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-10 text-left">
+                            <a class="btn btn-outline" routerLink="add" style="font-weight: bold">
+                                <i class="ft-refresh-ccw mr-half"></i> ++ Add Assessor </a>
+                        </div>
+                        <!-- Comment : Here include listof-job-role components -->
+                        <app-listof-assessor (selectedAssessor)="parentMethod($event)">Loading, please wait..</app-listof-assessor>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

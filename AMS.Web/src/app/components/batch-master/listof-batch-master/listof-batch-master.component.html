@@ -66,7 +66,7 @@
                           <td>{{batchMaster.BatchDetails.VTP_Name}}</td>
                           <td>{{batchMaster.BatchDetails.CityName}}</td>
                       </tr>
-                      <tr *ngIf="!searchedJobRoles && !isDataLoadingCompleted">
+                      <tr *ngIf="!searchedBatchMaster && !isDataLoadingCompleted">
                           <td colspan="4">Loading batch-master. Please wait...</td>
                       </tr>
                       <tr *ngIf="searchedBatchMaster == null && isDataLoadingCompleted">

@@ -49,26 +49,18 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr role="row" class="odd">
-                          <td class="sorting_1">Sector Skill Council(SSC)</td>
-                          <td>BWSSC</td>
-                          <td>Beauty and Welness Sector Skill Council</td>
+                      <tr role="row" class="odd"  (click)="onRowClick($event, skillCouncil.Id)" 
+                        *ngFor="let skillCouncil of searchedSkillCouncils;">
+                          <td class="sorting_1">{{skillCouncil.CouncilType}}</td>
+                          <td>{{skillCouncil.Code}}</td>
+                          <td>{{skillCouncil.FullName}}</td>
                       </tr>
-                      <tr role="row" class="even">
-                            <td class="sorting_1">Sector Skill Council(SSC)</td>
-                            <td>TSSC</td>
-                            <td>Telecom Sector Skill Council </td>
-                        </tr>
-                      <tr role="row" class="odd">
-                            <td class="sorting_1">Sector Skill Council(SSC)</td>
-                            <td>IASC</td>
-                            <td>Industrial Automation Surveillance Sector Skill Council</td>
-                        </tr>
-                      <tr role="row" class="even">
-                            <td class="sorting_1">Sector Skill Council(SSC)</td>
-                            <td>ESSCI</td>
-                            <td>Electronics Sector Skill Council</td>
-                        </tr>
+                      <tr *ngIf="!searchedSkillCouncils && !isDataLoadingCompleted">
+                        <td colspan="4">Loading skill-councils. Please wait...</td>
+                    </tr>
+                    <tr *ngIf="searchedSkillCouncils == null && isDataLoadingCompleted">
+                        <td colspan="4" style="text-align:center;color:red">No skill-council found !!</td>
+                    </tr>
                   </tbody>
               </table>
               <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 6 entries</div>

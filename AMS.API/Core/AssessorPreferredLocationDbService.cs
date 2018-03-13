@@ -164,16 +164,17 @@ namespace AMS.API.Core
 
         #region Comment : Here DELETE/REMOVE Methods.
 
-        OperationStatus IAssessorPreferredLocationDbService.RemovePreferredLocation(Int64 id, Int64 assessorId)
+        OperationStatus IAssessorPreferredLocationDbService.RemovePreferredLocation(Int64 assessorId, int cityId, Int64 id)
         {
             OperationStatus operationStatus = new OperationStatus() { RequestProcessed = false, RequestSuccessful = false };
             try
             {
-                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorPreferredLocation", QueryCommandType.StoredProcedure,
+                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorPreferredLocations", QueryCommandType.StoredProcedure,
                                     new List<IDbDataParameter>
                                     {
                                         new SqlParameter() { ParameterName = "@Id", Value = id,SqlDbType = SqlDbType.BigInt },
                                         new SqlParameter() { ParameterName = "@AssessorId", Value = assessorId,SqlDbType = SqlDbType.BigInt },
+                                        new SqlParameter() { ParameterName = "@CityId", Value = cityId,SqlDbType = SqlDbType.Int },
                                     });
 
                 //if successfully executed

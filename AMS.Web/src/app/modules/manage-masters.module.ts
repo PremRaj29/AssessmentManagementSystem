@@ -22,7 +22,7 @@ import { DashboardComponent } from '../components/masters/dashboard/dashboard.co
     
     // custom modules
     ,ManageMastersRoutingModule
-    //,ManageJobRoleModule
+    //,ManageJobRoleModule  //because Lazy-Loaded module
     ,ManageSchemeModule
     ,ManageVtpModule
     ,ManageSkillCouncilModule

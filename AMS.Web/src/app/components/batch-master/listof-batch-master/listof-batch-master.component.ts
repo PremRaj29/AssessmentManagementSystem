@@ -38,6 +38,7 @@ export class ListofBatchMasterComponent implements OnInit {
   
     public searchBatchMaster(batchMasterSearchParams: any)
     {
+      debugger;
       //alert('Working Child');
   
       //reset data every time before calling

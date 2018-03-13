@@ -28,7 +28,7 @@ namespace AMS.API.Contracts
         /// </summary>
         /// <param name="assessorIdId"></param>
         /// <returns></returns>
-        OperationStatus RemovePreferredLocation(Int64 id, Int64 assessorId);
+        OperationStatus RemovePreferredLocation(Int64 assessorId, int cityId, Int64 id);
 
         /// <summary>
         /// Modify Assessor PreferredLocations data

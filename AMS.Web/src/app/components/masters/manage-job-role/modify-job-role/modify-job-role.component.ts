@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router, Params } from '@angular/router';
+
+//custom components/modules/services
 import { JobRoleService } from '../../../../services/manage-job-role/job-role.service';
 import { JobRoleResponse } from '../../../../models/manage-job-role/job-role-response';
 import { JobRole } from '../../../../models/manage-job-role/job-role';

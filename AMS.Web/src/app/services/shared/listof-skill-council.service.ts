@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 
 // import Domain class
 import { SkillCouncil } from '../../models/manage-skill-council/skill-council';
+import { environment } from '../../../environments/environment';
 
 //#endregion
 
@@ -17,6 +18,8 @@ import { SkillCouncil } from '../../models/manage-skill-council/skill-council';
 
 @Injectable()
 export class ListofSkillCouncilService {
+
+  private skillCouncilRequestUrl: string = environment.apiUrl + 'CouncilType/';
 
   constructor(private http: Http) { };
 
@@ -27,10 +30,10 @@ export class ListofSkillCouncilService {
    */
   getSkillCouncils(councilTypeId: number, skillCouncilId?: number) {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/CouncilType/1/SkillCouncil/4
+    //reference-url : http://{Path}/AMS.Services/api/CouncilType/1/SkillCouncil/4
 
     // comment : here manipulate url string
-    let requestUrl = `http://localhost/AMS.Services/api/CouncilType/${councilTypeId}/SkillCouncil/${skillCouncilId || ''}`;
+    let requestUrl = this.skillCouncilRequestUrl +`${councilTypeId}/SkillCouncil/${skillCouncilId || ''}`;
 
     return this.http
       .get(requestUrl)

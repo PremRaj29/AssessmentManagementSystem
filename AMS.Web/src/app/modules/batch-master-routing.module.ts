@@ -24,4 +24,4 @@ export class BatchMasterRoutingModule { }
  * These are just a convention we should like to use to grab a set of the routed components, 
  * instead of having to re-import each component, one by one into main Module. like 'ManageMastersModule'
  */
-export const routedJobRoleComponents = [BatchMasterComponent,AddBatchMasterComponent,ModifyBatchMasterComponent];
+export const routedBatchMasterComponents = [BatchMasterComponent,AddBatchMasterComponent,ModifyBatchMasterComponent];

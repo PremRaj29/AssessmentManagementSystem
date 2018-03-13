@@ -9,11 +9,11 @@ namespace AMS.API.DTO.Assessor
     {
         public string Name { get; set; }
 
-        public char Gender { get; set; }
+        public char? Gender { get; set; }
 
-        public string Email { get; set; }
+        public string EmailId { get; set; }
 
-        public string Mobile { get; set; }
+        public string MobileNo { get; set; }
 
         public string WhatsAppNo { get; set; }
 
@@ -29,7 +29,7 @@ namespace AMS.API.DTO.Assessor
 
         public int JobRoleId { get; set; }
 
-        public int IdProofId { get; set; }
+        public int IdProofTypeId { get; set; }
 
         public string IdProofValue { get; set; }
 

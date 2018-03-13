@@ -163,16 +163,17 @@ namespace AMS.API.Core
 
         #region Comment : Here DELETE/REMOVE Methods.
 
-        OperationStatus IAssessorJobRoleDbService.RemoveJobRole(Int64 id, Int64 assessorId)
+        OperationStatus IAssessorJobRoleDbService.RemoveJobRole(Int64 assessorId, int jobRoleId, Int64 id)
         {
             OperationStatus operationStatus = new OperationStatus() { RequestProcessed = false, RequestSuccessful = false };
             try
             {
-                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorJobRole", QueryCommandType.StoredProcedure,
+                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorJobRoles", QueryCommandType.StoredProcedure,
                                     new List<IDbDataParameter>
                                     {
                                         new SqlParameter() { ParameterName = "@Id", Value = id,SqlDbType = SqlDbType.BigInt },
                                         new SqlParameter() { ParameterName = "@AssessorId", Value = assessorId,SqlDbType = SqlDbType.BigInt },
+                                        new SqlParameter() { ParameterName = "@JobRoleId", Value = jobRoleId,SqlDbType = SqlDbType.Int },
                                     });
 
                 //if successfully executed

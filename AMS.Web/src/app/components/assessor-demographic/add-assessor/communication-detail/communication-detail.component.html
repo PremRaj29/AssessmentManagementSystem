@@ -1,0 +1,193 @@
+<div>
+  <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+  <h2 style="margin-top: 0;color:#55518a;text-decoration: underline">Assessor Communication Details</h2>
+  <h3 style="margin-top: 0;color:#55518a"></h3>
+
+  <div class="card-block">
+    <div class="card-body">
+      <div class="">
+        <fieldset [disabled]="disableFormSubmit == 1">
+          <div class="form-group row">
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control" style="color:green;text-align: left;" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+            <!-- {{assessorCommunicationDetail | json}} -->
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">State</label>
+            <div class="col-md-6 col-lg-5">
+              <app-state [stateId]="assessorCommunicationDetail.StateId" (selectedState)="stateChanged($event)">
+                Loading..</app-state>
+            </div>
+            <!-- StateId : {{assessorCommunicationDetail.StateId}} -->
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">City</label>
+            <div class="col-md-6 col-lg-5">
+              <app-city [stateId]="assessorCommunicationDetail.StateId" [cityId]="assessorCommunicationDetail.CityId" (selectedCity)="cityChanged($event)">
+                Loading..</app-city>
+            </div>
+            <!-- CityId : {{assessorCommunicationDetail.CityId}} -->
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Email Id</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_EmailId" id="txt_EmailId" [(ngModel)]="assessorCommunicationDetail.EmailId" class="form-control field-sm"
+                placeholder="" ng-maxlength="150" maxlength="150" #txt_EmailId="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Mobile Number</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_MobileNo" id="txt_MobileNo" [(ngModel)]="assessorCommunicationDetail.MobileNo" class="form-control field-sm"
+                placeholder="" ng-maxlength="10" maxlength="10" #txt_MobileNo="ngModel" (keyup)="replicateMobileNo()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control" for="projectinput1">WhatsApp Running On PrimaryNo</label>
+            <div class="col-md-6">
+              <div class="input-group">
+              </div>
+              <div class="radio-toggle">
+                <div class="btn-radio multiple-state" id="broker">
+                  <input type="radio" name="radio_WhatsAppOnPrimaryNo" id="radio_WhatsAppOnPrimaryNo1" [value]="true" [(ngModel)]="assessorCommunicationDetail.WhatsAppOnPrimaryNo" #radio_WhatsAppOnPrimaryNo="ngModel"
+                    (change)="replicateMobileNo()">
+                  <label for="radio_WhatsAppOnPrimaryNo1">Yes</label>
+                </div>
+                <div class="btn-radio multiple-state" id="customer">
+                  <input type="radio" name="radio_WhatsAppOnPrimaryNo" id="radio_WhatsAppOnPrimaryNo2" [value]="false" [(ngModel)]="assessorCommunicationDetail.WhatsAppOnPrimaryNo" #radio_WhatsAppOnPrimaryNo="ngModel"
+                  (change)="replicateMobileNo()">
+                  <label for="radio_WhatsAppOnPrimaryNo2">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">WhatsAppNo</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_WhatsAppNo" id="txt_WhatsAppNo" [(ngModel)]="assessorCommunicationDetail.WhatsAppNo" class="form-control field-sm"
+                placeholder="" ng-maxlength="10" maxlength="10" #txt_WhatsAppNo="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Secondary Email Id</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_SecondaryEmailId" id="txt_SecondaryEmailId" [(ngModel)]="assessorCommunicationDetail.SecondaryEmailId" class="form-control field-sm"
+                placeholder="" ng-maxlength="150" maxlength="150" #txt_SecondaryEmailId="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Secondary Mobile Number</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_SecondaryMobileNo" id="txt_SecondaryMobileNo" [(ngModel)]="assessorCommunicationDetail.SecondaryMobileNo" class="form-control field-sm"
+                placeholder="" ng-maxlength="10" maxlength="10" #txt_SecondaryMobileNo="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Landline Number</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_LandlineNo" id="txt_txt_LandlineNo" [(ngModel)]="assessorCommunicationDetail.LandlineNo" class="form-control field-sm"
+                placeholder="" ng-maxlength="15" maxlength="15" #txt_txt_LandlineNo="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Emergancy Contact No</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_EmergancyContactNo1" id="txt_EmergancyContactNo1" [(ngModel)]="assessorCommunicationDetail.EmergancyContactNo1" class="form-control field-sm"
+                placeholder="" ng-maxlength="10" maxlength="10" #txt_EmergancyContactNo1="ngModel">
+            </div>
+          </div>
+          <!-- Comment : Here CommunicationAddress Section -->
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Communcation Address Line1</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_CommAddressLine1" id="txt_CommAddressLine1" [(ngModel)]="assessorCommunicationDetail.CommAddressLine1" class="form-control field-sm"
+                placeholder="" ng-maxlength="500" maxlength="500" #txt_CommAddressLine1="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Communcation Address Line2</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_CommAddressLine2" id="txt_CommAddressLine2" [(ngModel)]="assessorCommunicationDetail.CommAddressLine2" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_CommAddressLine2="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Communcation Address Line3</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_CommAddressLine3" id="txt_CommAddressLine3" [(ngModel)]="assessorCommunicationDetail.CommAddressLine3" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_CommAddressLine3="ngModel">
+            </div>
+          </div>            
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Communication Address PinCode</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_CommAddressPinCode" id="txt_CommAddressPinCode" [(ngModel)]="assessorCommunicationDetail.CommAddressPinCode" class="form-control field-sm"
+                placeholder="" ng-maxlength="5" maxlength="5" #txt_CommAddressPinCode="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control" for="projectinput1">Same As Communiaction Address</label>
+            <div class="col-md-6">
+              <div class="input-group">
+              </div>
+              <div class="radio-toggle">
+                <div class="btn-radio multiple-state" id="broker">
+                  <input type="radio" name="radio_HasSameAsCommAddress" id="radio_HasSameAsCommAddress1" [value]="true" [(ngModel)]="assessorCommunicationDetail.HasSameAsCommAddress" #radio_HasSameAsCommAddress="ngModel"
+                  (change)="replicateCommunicationAddress()">
+                  <label for="radio_HasSameAsCommAddress1">Yes</label>
+                </div>
+                <div class="btn-radio multiple-state" id="customer">
+                  <input type="radio" name="radio_HasSameAsCommAddress" id="radio_HasSameAsCommAddress2" [value]="false" [(ngModel)]="assessorCommunicationDetail.HasSameAsCommAddress" #radio_HasSameAsCommAddress="ngModel"
+                  (change)="replicateCommunicationAddress()">
+                  <label for="radio_HasSameAsCommAddress2">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Comment : Here PermanentAddress Section -->
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Permanent Address Line1</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_PermanentAddressLine1" id="txt_PermanentAddressLine1" [(ngModel)]="assessorCommunicationDetail.PermanentAddressLine1" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_PermanentAddressLine1="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Permanent Address Line2</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_PermanentAddressLine2" id="txt_PermanentAddressLine2" [(ngModel)]="assessorCommunicationDetail.PermanentAddressLine2" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_PermanentAddressLine2="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Permanent Address Line3</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_PermanentAddressLine3" id="txt_PermanentAddressLine3" [(ngModel)]="assessorCommunicationDetail.PermanentAddressLine3" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_PermanentAddressLine3="ngModel">
+            </div>
+          </div>            
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-5 label-control">Permanent Address PinCode</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_PermanentAddressPinCode" id="txt_PermanentAddressPinCode" [(ngModel)]="assessorCommunicationDetail.PermanentAddressPinCode" class="form-control field-sm"
+                placeholder="" ng-maxlength="5" maxlength="5" #txt_PermanentAddressPinCode="ngModel">
+            </div>
+          </div>
+          <!-- Comment : Here Submition Panel -->
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-4 label-control"></label>
+            <div class="col-md-6 col-lg-5 text-right">
+              <div class="field-lg">
+                <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetFormDetails()">
+                  <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; submitAssessorCommunicationDetails();">
+                  <i class="ft-search mr-half"></i>Submit </a>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

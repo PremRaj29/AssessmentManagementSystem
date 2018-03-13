@@ -28,7 +28,7 @@ namespace AMS.API.DTO.Assessor
 
         public string HighestQualificationName { get; set; }
 
-        public int HighestQualificationId { get; set; }
+        public int? HighestQualificationId { get; set; }
 
         [StringLength(500)]
         public string Qualifications { get; set; }

@@ -1,0 +1,9 @@
+<select class="form-control field-sm" name="ddl_IdProofDocType" id="ddl_IdProofDocType" 
+[(ngModel)]='idProofDocTypeId' (ngModelChange)="onItemChange($event)" #ddl_IdProofDocType="ngModel" required>
+  <option [value]="null"  disabled>Select</option>
+  <option value="1">Aadhar Card</option>
+  <option value="2">Driving License</option>
+  <option value="3">Passport Number</option>
+  <option value="4">10th Certificate</option>
+  <option value="5">Voter Id</option>
+</select>

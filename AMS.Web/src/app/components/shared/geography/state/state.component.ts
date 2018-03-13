@@ -14,7 +14,7 @@ import { GeographyResponse } from '../../../../models/geography/geography-respon
 export class StateComponent implements OnInit {
 
   //interact with input & output of this components
-  @Input('stateId') stateId: number;
+  @Input('stateId') stateId: number = null;
   @Output('selectedState') selectedState = new EventEmitter<number>();
 
   public states: Array<State> = null;
@@ -47,6 +47,8 @@ export class StateComponent implements OnInit {
         if (geographyResponse != null && geographyResponse.OperationStatus.RequestSuccessful) {
           // reset skillcouncil data
           this.states = geographyResponse.States;
+          //also reset selectedId comp output
+          this.selectedState.emit(this.stateId);
           //console.log(geographyResponse.States);
         }
         else {

@@ -179,7 +179,7 @@ namespace AMS.API.Core
                                    new SqlParameter() { ParameterName = "@AssessorId", Value = data.AssessorId, SqlDbType = SqlDbType.BigInt },
                                    new SqlParameter() { ParameterName = "@Name", Value = data.Name, SqlDbType = SqlDbType.VarChar, Size=200 },
                                    new SqlParameter() { ParameterName = "@Gender", Value = data.Gender, SqlDbType = SqlDbType.Char, Size=1 },
-                                   new SqlParameter() { ParameterName = "@DOB", Value = data.DOB, SqlDbType = SqlDbType.DateTime },
+                                   new SqlParameter() { ParameterName = "@DOB", Value = data.DOB, SqlDbType = SqlDbType.DateTime,IsNullable=true },
                                    new SqlParameter() { ParameterName = "@MaritalStatus", Value = data.MaritalStatus, SqlDbType = SqlDbType.Bit },
                                    new SqlParameter() { ParameterName = "@FatherName", Value = data.FatherName, SqlDbType = SqlDbType.VarChar, Size=50 },
                                    new SqlParameter() { ParameterName = "@MotherName", Value = data.MotherName, SqlDbType = SqlDbType.VarChar, Size=50 },

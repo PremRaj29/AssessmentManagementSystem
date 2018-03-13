@@ -41,7 +41,7 @@ export class BatchMasterService {
   getBatchMasterDetails(batchMasterId: number) : Observable<BatchMasterResponse>
   {
     //debugger;
-    //reference-url : http://localhost/AMS.Services/api/BatchMaster/1
+    //reference-url : http://{Path}/AMS.Services/api/BatchMaster/1
 
     // comment : here manipulate url string
     this.requestUrl  = this.batchMasterRequestUrl + batchMasterId;
@@ -58,7 +58,7 @@ export class BatchMasterService {
   getBatchMasterDetailsV2(batchId: string = null,batchName: string = null) : Observable<BatchMasterResponse>
   {
     //debugger;
-    //reference-url : http://localhost/AMS.Services/api/BatchMaster/36541/{ #123/Prem/$TRACE }
+    //reference-url : http://{Path}/AMS.Services/api/BatchMaster/36541/{ #123/Prem/$TRACE }
 
     // comment : here manipulate url string
     this.requestUrl  = this.batchMasterRequestUrl + `?BatchId=${batchId || ''}&BatchName=${batchName || ''}`;
@@ -74,7 +74,7 @@ export class BatchMasterService {
    */
   addBatchMaster(batchMaster: BatchMaster): Observable<OperationStatus> {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/BatchMaster
+    //reference-url : http://{Path}/AMS.Services/api/BatchMaster
 
     // comment : here manipulate url string
     this.requestUrl = this.batchMasterRequestUrl;
@@ -92,7 +92,7 @@ export class BatchMasterService {
    */
   searchBatchMaster(searchParams: SearchBatchMasterRequestParams): Observable<BatchMasterResponse> {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/BatchMaster/Search?BatchId=386312
+    //reference-url : http://{Path}/AMS.Services/api/BatchMaster/Search?BatchId=386312
 
     // comment : here manipulate url string
     this.requestUrl = this.batchMasterRequestUrl + `Search?BatchId=${searchParams.BatchId || ''}&BatchName=${searchParams.BatchName || ''}&SchemeId=${searchParams.SchemeId}&JobRoleId=${searchParams.JobRoleId}&CityId=${searchParams.CityId}&VTP_Id=${searchParams.VTP_Id}&TotalCandidates=${searchParams.TotalCandidates}`;
@@ -109,7 +109,7 @@ export class BatchMasterService {
   modifyBatchMaster(batchMaster: BatchMaster): Observable<OperationStatus> 
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/SkillCouncil/5/JobRole/127
+    //reference-url : http://{Path}/AMS.Services/api/SkillCouncil/5/JobRole/127
 
     // comment : here manipulate url string
     this.requestUrl = this.batchMasterRequestUrl + `${batchMaster.Id || ''}`;
@@ -128,7 +128,7 @@ export class BatchMasterService {
   deleteBatchMaster(batchMasterId: number): Observable<OperationStatus> 
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/BatchMaster/1
+    //reference-url : http://{Path}/AMS.Services/api/BatchMaster/1
 
     // comment : here manipulate url string
     this.requestUrl = this.batchMasterRequestUrl +batchMasterId;

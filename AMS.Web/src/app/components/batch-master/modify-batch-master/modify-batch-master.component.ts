@@ -7,9 +7,11 @@ import { OperationStatus } from '../../../models/shared/operation-status';
 // import Domain class
 import { BatchMaster } from '../../../models/batch-master/batch-master';
 import { BatchMasterResponse } from '../../../models/batch-master/batch-master-response';
+import { Assessor } from '../../../models/assessor-demographic/assessor';
 
 // import required services for this component
 import { BatchMasterService } from '../../../services/batch-master/batch-master.service';
+import { BatchAllocationService } from '../../../services/batch-master/batch-allocation.service';
 
 //#endregion
 
@@ -18,27 +20,35 @@ import { BatchMasterService } from '../../../services/batch-master/batch-master.
 @Component({
   selector: 'app-modify-batch-master',
   templateUrl: './modify-batch-master.component.html',
-  styleUrls: ['./modify-batch-master.component.css']
+  styleUrls: ['./modify-batch-master.component.css'],
+  providers:[BatchAllocationService]
 })
 export class ModifyBatchMasterComponent implements OnInit {
 
   //default batch-master object
   batchMaster: BatchMaster = new BatchMaster();
+  currentlyRoutedBatchMasterId: number = 0;
 
   formSubmitted: boolean = false;
   isReadOnlyMode: number = 1;
   isDataLoadingCompleted: boolean = true;
   isFormDataSubmissionCompleted: boolean = null;
 
-  constructor(private batchMasterService: BatchMasterService, private router: Router,private route: ActivatedRoute) { }
+  constructor(private batchMasterService: BatchMasterService,private batchAllocationService: BatchAllocationService, private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe((routeData: Params) => {
+    this.route.params.subscribe((routeData: Params) => 
+    {
+      //set this id inot local variable for future usage
+      this.currentlyRoutedBatchMasterId = routeData['id'];
+
+      //load content to pre-populate
       this.loadBatchMasterDetails(routeData['id']);
     });
   }
 
   loadBatchMasterDetails(batchMasterId: number) {
+    debugger;
     // here get Question obserable
     let observable = this.batchMasterService.getBatchMasterDetails(batchMasterId)
 
@@ -54,7 +64,7 @@ export class ModifyBatchMasterComponent implements OnInit {
           && batchMasterResponse.BatchMaster.length > 0
         ) {
           this.batchMaster = batchMasterResponse.BatchMaster[0];
-          //console.log(batchMasterResponse);
+          console.log(batchMasterResponse);
         }
         else {
           // show error message on screen
@@ -128,6 +138,64 @@ export class ModifyBatchMasterComponent implements OnInit {
   public readOnlyModeChanged() {
     //reset form-submitted status
     this.formSubmitted = false;
+  }
+
+  public unMapAllocatedAssessorOnBatch(assessorId)
+  {
+    debugger;
+
+    if (!(assessorId >0 && this.batchMaster.BatchId != ''))
+    {
+      return false;
+    }
+    else
+    {
+      let confirmStatus = confirm('Are you sure want to continue?');
+
+      if(!confirmStatus)
+      {
+        return false;
+      }
+    }
+
+    //comment : here [IMP] make sure to reload page after "UnMapping" assessor on current BatchMaster 
+    this.isFormDataSubmissionCompleted = false;
+
+    // here get Question obserable
+    let observable = this.batchAllocationService.deleteBatchAllocation(this.batchMaster.Id,assessorId);
+
+    let subscription = observable.subscribe
+      (
+      // calls the onNext() function in the observer
+      (assessorResponse: OperationStatus) => {
+        //debugger;
+
+        // if service has returned valid response then only
+        if (assessorResponse != null && assessorResponse.RequestSuccessful == true) 
+        {
+          //here reload "Assessor PreferredLocation" after submission/add operation
+          console.log(assessorResponse);
+
+          alert('Assessor has been un-mapped successfuly for current Batch.');
+          
+          //comment : here [IMP] after delete reset "Allocated Assessor" object blank to show "Allocate/Map" link back on screen
+          //this.batchMaster.BatchAllocationDetails = null;
+
+          //reload screen
+          this.loadBatchMasterDetails(this.currentlyRoutedBatchMasterId);
+        }
+        else {
+          // show error message on screen
+        }
+      },
+
+      // calls onError() function either when the Observable calls the error() method or when any error is thrown in the process.
+      // here we can also call our logger service to log this exception
+      (error: string) => console.log('error while submitting data for AssessorPreferredLocation: ' + error),
+
+      // calls the onComplete() function in the observer
+      () => { this.isFormDataSubmissionCompleted = true; console.log('AssessorPreferredLocation details successfully submitted'); subscription.unsubscribe(); }
+      );
   }
 
   //#region Child components event-emitter handler methods

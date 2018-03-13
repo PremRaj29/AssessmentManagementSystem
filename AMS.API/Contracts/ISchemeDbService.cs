@@ -36,5 +36,13 @@ namespace AMS.API.Contracts
         /// <param name="data"></param>
         /// <returns></returns>
         OperationStatus UpdateScheme(Scheme data);
+
+        /// <summary>
+        /// Return list of Schemes based on supplied Search-Parameters
+        /// </summary>
+        /// <param name="schemeCode"></param>
+        /// <param name="schemeName"></param>
+        /// <returns></returns>
+        SchemeResponse SearchSchemes(string schemeCode, string schemeName);
     }
 }

@@ -1,0 +1,85 @@
+<div>
+  <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+  <h2 style="margin-top: 0;color:#55518a;text-decoration: underline">Assessor Other Details</h2>
+  <h3 style="margin-top: 0;color:#55518a"></h3>
+
+  <div class="card-block">
+    <div class="card-body">
+      <div class="">
+        <fieldset [disabled]="disableFormSubmit == 1">
+          <div class="form-group row">
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-6 label-control" style="color:green;text-align: left;" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Assessor OdigoOkayStatus</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_OdigoOkayStatus" id="txt_OdigoOkayStatus" [(ngModel)]="assessorOtherDetail.OdigoOkayStatus" class="form-control field-sm"
+                placeholder="" ng-maxlength="20" maxlength="20" #txt_OdigoOkayStatus="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Bank Name</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_BankName" id="txt_BankName" [(ngModel)]="assessorOtherDetail.BankName" class="form-control field-sm"
+                placeholder="" ng-maxlength="250" maxlength="250" #txt_BankName="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Bank Account Number</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_AccountNumber" id="txt_AccountNumber" [(ngModel)]="assessorOtherDetail.AccountNumber" class="form-control field-sm"
+                placeholder="" ng-maxlength="20" maxlength="20" #txt_AccountNumber="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Bank IFSC_Code</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_IFSC_Code" id="txt_IFSC_Code" [(ngModel)]="assessorOtherDetail.IFSC_Code" class="form-control field-sm"
+                placeholder="" ng-maxlength="20" maxlength="20" #txt_IFSC_Code="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Bank Address</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_BankAddress" id="txt_BankAddress" [(ngModel)]="assessorOtherDetail.BankAddress" class="form-control field-sm"
+                placeholder="" ng-maxlength="500" maxlength="500" #txt_BankAddress="ngModel">
+            </div>
+          </div>          
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Highest QualificationName</label>
+            <div class="col-md-6 col-lg-5">
+              <select class="form-control field-sm" name="ddl_HighestQualificationName" id="ddl_HighestQualificationName" [(ngModel)]="assessorOtherDetail.HighestQualificationId" 
+                #ddl_State="ngModel" required>
+                <option [value]="null" selected="selected" disabled>Select</option>
+                <!-- <option *ngFor="let state of states" value="{{state.Id}}">
+                  {{state.Name}}
+                </option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Qualification</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_Qualifications" id="txt_Qualifications" [(ngModel)]="assessorOtherDetail.Qualifications" class="form-control field-sm"
+                placeholder="" ng-maxlength="500" maxlength="500" #txt_Qualifications="ngModel">
+            </div>
+          </div>
+          <!-- Comment : Here Submition Panel -->
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-4 label-control"></label>
+            <div class="col-md-6 col-lg-3 text-right">
+              <div class="field-lg">
+                <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetFormDetails()">
+                  <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; submitAssessorOtherDetails();">
+                  <i class="ft-search mr-half"></i>Submit </a>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

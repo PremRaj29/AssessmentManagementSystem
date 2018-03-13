@@ -203,6 +203,58 @@ namespace AMS.API.Core
 
         #endregion
 
+        #region Comment : Here Custom Methods
+
+        /// <summary>
+        /// Return list of Schemes based on supplied Search-Parameters
+        /// </summary>
+        /// <returns></returns>
+        SchemeResponse ISchemeDbService.SearchSchemes(string schemeCode, string schemeName)
+        {
+            SchemeResponse schemeResponse = new SchemeResponse();
+
+            try
+            {
+                var dbSet = GetDbConnector().LoadDataSet("SearchSchemes", QueryCommandType.StoredProcedure,
+                                            new List<System.Data.IDbDataParameter>
+                                            {
+                                                new SqlParameter() { ParameterName = "@SchemeCode", Value = schemeCode, SqlDbType = SqlDbType.VarChar, Size=10 },
+                                                new SqlParameter() { ParameterName = "@SchemeName", Value = schemeName, SqlDbType = SqlDbType.VarChar, Size=500 },
+                                            });
+
+                //Comment : Here fill & return generic list from DbSet
+                var listScheme = new List<Scheme>();
+                if (dbSet != null && dbSet.Tables.Count > 0)
+                {
+                    foreach (DataRow dataRow in dbSet.Tables[0].Rows)
+                    {
+                        listScheme.Add(
+                            new Scheme()
+                            {
+                                Id = Convert.ToInt32(dataRow["SchemeId"]),
+                                Code = dataRow["Code"].ToString(),
+                                Name = dataRow["Name"].ToString(),
+                                Description = dataRow["Description"].ToString(),
+                                IsActive = Convert.ToBoolean((dataRow["IsActive"] == DBNull.Value || dataRow["IsActive"] == null) ? 0 : dataRow["IsActive"])
+                            });
+                    }
+                }
+
+                //assign fecthed list
+                schemeResponse.Scheme = listScheme;
+                schemeResponse.OperationStatus = new OperationStatus { ServiceName = "SearchSchedmes", ServiceMethod = "Get", RequestProcessed = true, RequestSuccessful = true };
+            }
+            catch (Exception ex)
+            {
+                schemeResponse.OperationStatus = new OperationStatus { Messages = new List<Message>() { new Message() { DTOName = "Scheme", DTOProperty = "", MessageType = MessageType.SystemError, Text = ex.Message } }, RequestProcessed = true, RequestSuccessful = false };
+
+            }
+
+            return schemeResponse;
+        }
+
+        #endregion
+
         #endregion
 
         #region Private Methods
@@ -229,8 +281,8 @@ namespace AMS.API.Core
             //if successfully executed
             if (rowEffeted > 0)
             {
-                Int32 jobRoleId = Convert.ToInt32(parameterList[parameterList.Count() - 1].Value);
-                return jobRoleId;
+                Int32 schemeId = Convert.ToInt32(parameterList[parameterList.Count() - 1].Value);
+                return schemeId;
             }
             else
             {

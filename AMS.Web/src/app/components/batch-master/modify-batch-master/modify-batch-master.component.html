@@ -252,7 +252,9 @@
                                   maxlength="10">
                               </div>
                             </div>
+                            <hr />                            
                           </fieldset>
+
                           <!-- Comment : Here Form Data Submission Panel -->
                           <div class="form-group row">
                             <label class="col-md-4 col-lg-3 label-control"></label>
@@ -263,6 +265,65 @@
                               </div>
                             </div>
                           </div>
+                          
+                          <!-- Comment : Here Allocated Assessor On Given BatchMaster -->
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">
+                              <h5> Allocated Assessor Detail </h5>
+                            </label>
+                          </div>
+                          <!-- Comment : Here If no Assessor has been allocated or mapped on this Batch then show this Link Assessor -->
+                          <div class="form-group row" *ngIf="batchMaster.BatchAllocationDetails == null || batchMaster.BatchAllocationDetails?.Assessor?.Id == 0">
+                              <label class="col-md-4 col-lg-3 label-control">
+                                  <a class="btn btn-outline" routerLink="/batch-master/allocate-batch" style="font-weight: bold">
+                                      <i class="ft-refresh-ccw mr-half"></i> ++ Allocate/Map Assessor </a>
+                              </label>
+                          </div>
+                          <!-- Comment : Here If any Assessor has been allocated or mapped then show Assessor details -->
+                          <div class="form-group row" *ngIf="batchMaster.BatchAllocationDetails != null && batchMaster.BatchAllocationDetails?.Assessor?.Id >0">
+                            <label class="col-md-3 col-lg-1 label-control"></label>
+                            <div class="col-md-7 col-lg-9 text-left">
+                              <div class="table-responsive pt-0 search-quote-table card-block">
+                                <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                                  <table id="myTable" class="table table-bordered table-striped table-cust dataTable no-footer tbl" role="grid" aria-describedby="example_info">
+                                    <thead>
+                                      <tr role="row">
+                                          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Date: activate to sort column descending"
+                                          style="width: 0px;">Assessment Date & Timing</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Name: activate to sort column descending"
+                                          style="width: 0px;">Assessor Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"
+                                          style="width: 0px;">Email</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Mobile No: activate to sort column ascending"
+                                          style="width: 0px;">Mobile No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="State Name: activate to sort column ascending"
+                                          style="width: 0px;">State Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="City Name: activate to sort column ascending"
+                                          style="width: 0px;">City Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending"
+                                          style="width: 0px;">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr role="row" class="odd">
+                                          <td>{{batchMaster.BatchAllocationDetails.AssessmentDate  | slice:0:10 }} ({{batchMaster.BatchAllocationDetails.AssessmentTiming | assessmentTiming }})</td>
+                                          <td>{{batchMaster.BatchAllocationDetails?.Assessor?.PerosnalDetail?.Name}}</td>
+                                          <td>{{batchMaster.BatchAllocationDetails?.Assessor?.CommunicationDetail?.EmailId}}</td>
+                                          <td>{{batchMaster.BatchAllocationDetails?.Assessor?.CommunicationDetail?.MobileNo}}</td>
+                                          <td>{{batchMaster.BatchAllocationDetails?.Assessor?.CommunicationDetail?.StateName}}</td>
+                                          <td>{{batchMaster.BatchAllocationDetails?.Assessor?.CommunicationDetail?.CityName}}</td>
+                                          <td>
+                                              <a href="javascript:void(0)" class="" (click)="unMapAllocatedAssessorOnBatch(batchMaster.BatchAllocationDetails?.Assessor?.Id)" 
+                                                style="font-weight: bold">UnMap</a>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     </div>

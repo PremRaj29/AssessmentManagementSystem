@@ -13,14 +13,14 @@ import { GeographyResponse } from '../../../../models/geography/geography-respon
 export class CityComponent implements OnInit {
 
   //interact with input & output of this components
-  @Input('stateId') stateId: number;
-  @Input('cityId') cityId: number;
+  @Input('stateId') stateId: number = null;
+  @Input('cityId') cityId: number = null;
   @Output('selectedCity') selectedCity = new EventEmitter<number>();
 
   public cities: Array<City> = null;
   isDataLoadingCompleted: boolean = false;
   dataLoadingText: string = 'loading, wait..';
-  defaultDDL_Option: string = 'loading, wait..';
+  defaultDDL_Option: string = (this.stateId != null) ? this.dataLoadingText : 'Select';
 
   constructor(private listofGeographyService: ListofGeographyService) { }
 

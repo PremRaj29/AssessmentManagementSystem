@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,10 +103,13 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="XCU.Common.DBHelper">
-      <HintPath>..\..\..\..\Projects\InternalProductRepository\XInsure\packages\Xceedance.Common.Utilities\XCU.Common.DBHelper.dll</HintPath>
+      <HintPath>..\packages\Custom.Common.Utilities\XCU.Common.DBHelper.dll</HintPath>
     </Reference>
     <Reference Include="XCU.Common.Encryption">
-      <HintPath>..\..\..\..\Projects\InternalProductRepository\XInsure\packages\Xceedance.Common.Utilities\XCU.Common.Encryption.dll</HintPath>
+      <HintPath>..\packages\Custom.Common.Utilities\XCU.Common.Encryption.dll</HintPath>
+    </Reference>
+    <Reference Include="XCU.Common.Logging">
+      <HintPath>..\packages\Custom.Common.Utilities\XCU.Common.Logging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -144,11 +148,19 @@
     <Compile Include="Contracts\IVocationalTrainingProviderDbService.cs" />
     <Compile Include="Contracts\ISkillCouncilDbService.cs" />
     <Compile Include="Contracts\IJobRolesDbService.cs" />
+    <Compile Include="Controllers\AssessorCommunicationDetailController.cs" />
+    <Compile Include="Controllers\AssessorController.cs" />
+    <Compile Include="Controllers\AssessorIdProofDetailController.cs" />
+    <Compile Include="Controllers\AssessorJobRoleController.cs" />
+    <Compile Include="Controllers\AssessorOtherDetailController.cs" />
+    <Compile Include="Controllers\AssessorPersonalDetailController.cs" />
+    <Compile Include="Controllers\AssessorPreferredLocationController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BatchAllocationController.cs" />
     <Compile Include="Controllers\BatchMasterController.cs" />
     <Compile Include="Controllers\GeographyController.cs" />
+    <Compile Include="Controllers\IdProofTypeController.cs" />
     <Compile Include="Controllers\SchemeController.cs" />
     <Compile Include="Controllers\VocationalTrainingProviderController.cs" />
     <Compile Include="Controllers\SkillCouncilController.cs" />
@@ -189,6 +201,9 @@
     <Compile Include="DTO\Assessor\PreferredLocationsResponse.cs" />
     <Compile Include="DTO\Assessor\SearchAssessorRequestParams.cs" />
     <Compile Include="DTO\BatchAllocation\BatchAllocation.cs" />
+    <Compile Include="DTO\BatchAllocation\BatchAllocationDetail.cs" />
+    <Compile Include="DTO\BatchAllocation\BatchMatchingAssessorResponse.cs" />
+    <Compile Include="DTO\BatchAllocation\SearchBatchMatchingAssessorRequestParams.cs" />
     <Compile Include="DTO\BatchMaster\BatchDetail.cs" />
     <Compile Include="DTO\BatchMaster\BatchMaster.cs" />
     <Compile Include="DTO\BatchMaster\BatchMasterRequestParams.cs" />
@@ -198,6 +213,8 @@
     <Compile Include="DTO\Geography\GeographyRequestParams.cs" />
     <Compile Include="DTO\Geography\GeographyResponse.cs" />
     <Compile Include="DTO\Geography\State.cs" />
+    <Compile Include="DTO\IdProofType\IdProofType.cs" />
+    <Compile Include="DTO\IdProofType\IdProofTypeResponse.cs" />
     <Compile Include="DTO\JobRole\JobRole.cs" />
     <Compile Include="DTO\JobRole\JobRoleRequestParams.cs" />
     <Compile Include="DTO\JobRole\JobRoleResponse.cs" />
@@ -206,6 +223,7 @@
     <Compile Include="DTO\Scheme\Scheme.cs" />
     <Compile Include="DTO\Scheme\SchemeRequestParams.cs" />
     <Compile Include="DTO\Scheme\SchemeResponse.cs" />
+    <Compile Include="DTO\SkillCouncil\SearchSkillCouncilsRequestParams.cs" />
     <Compile Include="DTO\SkillCouncil\SkillCouncil.cs" />
     <Compile Include="DTO\SkillCouncil\SkillCouncilRequestParams.cs" />
     <Compile Include="DTO\SkillCouncil\SkillCouncilResponse.cs" />

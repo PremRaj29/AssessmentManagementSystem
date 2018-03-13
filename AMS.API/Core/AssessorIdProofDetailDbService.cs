@@ -163,16 +163,17 @@ namespace AMS.API.Core
 
         #region Comment : Here DELETE/REMOVE Methods.
 
-        OperationStatus IAssessorIdProofDetailDbService.RemoveIdProofDetail(Int64 id, Int64 assessorId)
+        OperationStatus IAssessorIdProofDetailDbService.RemoveIdProofDetail(Int64 assessorId, int idProofTypeId, Int64 id)
         {
             OperationStatus operationStatus = new OperationStatus() { RequestProcessed = false, RequestSuccessful = false };
             try
             {
-                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorIdProofDetail", QueryCommandType.StoredProcedure,
+                var rowEffeted = GetDbConnector().ExecuteNonQuery("RemoveAssessorIdProofDetails", QueryCommandType.StoredProcedure,
                                     new List<IDbDataParameter>
                                     {
                                         new SqlParameter() { ParameterName = "@Id", Value = id,SqlDbType = SqlDbType.BigInt },
                                         new SqlParameter() { ParameterName = "@AssessorId", Value = assessorId,SqlDbType = SqlDbType.BigInt },
+                                        new SqlParameter() { ParameterName = "@IdProofTypeId", Value = idProofTypeId,SqlDbType = SqlDbType.Int },
                                     });
 
                 //if successfully executed
@@ -223,7 +224,7 @@ namespace AMS.API.Core
                                     new SqlParameter() { ParameterName = "@ModifiedBy", Value = data.ModifiedBy, SqlDbType = SqlDbType.Int },
                                     new SqlParameter() { ParameterName = "@IsActive", Value = data.IsActive, SqlDbType = SqlDbType.Bit },
 
-                                    new SqlParameter() { ParameterName = "AssessorId", SqlDbType = SqlDbType.BigInt, Direction = ParameterDirection.ReturnValue }
+                                    new SqlParameter() { ParameterName = "AssessorIdProofDocMappingId", SqlDbType = SqlDbType.BigInt, Direction = ParameterDirection.ReturnValue }
                                 };
 
             //Comment : Here get DbConnector object
@@ -232,8 +233,8 @@ namespace AMS.API.Core
             //if successfully executed
             if (rowEffeted > 0)
             {
-                Int64 assessorId = Convert.ToInt32(parameterList[parameterList.Count() - 1].Value);
-                return assessorId;
+                Int64 assessorIdProofDocMappingId = Convert.ToInt64(parameterList[parameterList.Count() - 1].Value);
+                return assessorIdProofDocMappingId;
             }
             else
             {

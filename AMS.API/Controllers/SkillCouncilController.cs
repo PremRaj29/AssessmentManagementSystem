@@ -23,10 +23,22 @@ namespace AMS.API.Controllers
         /// <param name="skillCouncilId"></param>
         /// <param name="skillCouncilId"></param>
         /// <returns></returns>
-        [Route("CouncilType/{councilTypeId}/SkillCouncil/{skillCouncilId?}")]
-        public IHttpActionResult Get(int councilTypeId, int skillCouncilId = 0)
+        [Route("CouncilType/{councilTypeId?}/SkillCouncil/{skillCouncilId?}")]
+        public IHttpActionResult Get(int councilTypeId = 0, int skillCouncilId = 0)
         {
             return Ok(GetSkillCouncilDbService().GetSkillCouncil(new SkillCouncilRequestParams() { CouncilTypeId = councilTypeId, SkillCouncilId = skillCouncilId }));
+        }
+
+        //Get: SearchSkillCouncil
+        [Route("CouncilType/SkillCouncil/Search")]
+        public IHttpActionResult GetSearchedSkillCouncils([FromUri]SearchSkillCouncilsRequestParams searchParams)
+        {
+            if (searchParams == null)
+            {
+                searchParams = new SearchSkillCouncilsRequestParams();
+            }
+
+            return Ok(GetSkillCouncilDbService().SearchSkillCouncils(searchParams));
         }
 
         //Post: SkillCouncil

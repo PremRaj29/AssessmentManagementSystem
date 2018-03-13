@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManageSkillCouncilComponent } from '../components/masters/manage-skill-council/manage-skill-council.component';
-import { AddSkillCouncilComponent } from '../components/masters/manage-skill-council/add-skill-council/add-skill-council.component';
-import { ModifySkillCouncilComponent } from '../components/masters/manage-skill-council/modify-skill-council/modify-skill-council.component';
+
+//import custom components
+import {ManageSkillCouncilRoutingModule,routedSkillCouncilComponents} from '../modules/manage-skill-council-routing.module';
+import { SharedSkillcouncilComponentsModule} from '../modules/shared/shared-skillcouncil-components.module';
 import { ListofSkillCouncilComponent } from '../components/masters/manage-skill-council/listof-skill-council/listof-skill-council.component';
+
+// custom providers
+import { SkillCouncilService } from '../services/manage-skill-council/skill-council.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ManageSkillCouncilRoutingModule,
+    SharedSkillcouncilComponentsModule
   ],
-  declarations: [ManageSkillCouncilComponent, AddSkillCouncilComponent, ModifySkillCouncilComponent, ListofSkillCouncilComponent]
+  declarations: [routedSkillCouncilComponents,ListofSkillCouncilComponent],
+  providers: [SkillCouncilService]
 })
 export class ManageSkillCouncilModule { }

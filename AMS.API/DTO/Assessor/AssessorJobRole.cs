@@ -16,7 +16,11 @@ namespace AMS.API.DTO.Assessor
 
         public int SkillCouncilTypeId { get; set; }
 
+        public int SkillCouncilTypeName { get; set; }
+
         public int SkillCouncilId { get; set; }
+
+        public int SkillCouncilName { get; set; }
 
         [Required]
         public int JobRoleId { get; set; }

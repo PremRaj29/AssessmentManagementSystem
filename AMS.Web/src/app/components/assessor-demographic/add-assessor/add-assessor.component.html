@@ -1,0 +1,167 @@
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
+        <h3 class="content-header-title">Add Assessor</h3>
+      </div>
+      <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
+        <div class="breadcrumb-wrapper col-xs-12 pl-0">
+          <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
+            <li class="breadcrumb-item">
+              <a routerLink="../">DASHBOARD</a>
+            </li>
+            <li class="breadcrumb-item active">Add Assessor</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
+          <!-- Comment : Here Tab Menus Section -->
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+            <div class="list-group">
+              <a (click)="setSelectedTab(0);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 0)}">
+                <h4 class="glyphicon glyphicon-plane"></h4>
+                <br/>Basic Details
+              </a>
+              <a (click)="setSelectedTab(1);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 1)}">
+                <h4 class="glyphicon glyphicon-road"></h4>
+                <br/>Personal Details
+              </a>
+              <a (click)="setSelectedTab(2);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 2)}">
+                <h4 class="glyphicon glyphicon-home"></h4>
+                <br/>Communication Details
+              </a>
+              <a (click)="setSelectedTab(3);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 3)}">
+                <h4 class="glyphicon glyphicon-cutlery"></h4>
+                <br/>Other Details
+              </a>
+              <a (click)="setSelectedTab(4);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 4)}">
+                <h4 class="glyphicon glyphicon-credit-card"></h4>
+                <br/>Job-Roles
+              </a>
+              <a (click)="setSelectedTab(5);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 5)}">
+                <h4 class="glyphicon glyphicon-credit-card"></h4>
+                <br/>Preferred-Location
+              </a>
+              <a (click)="setSelectedTab(6);" class="list-group-item text-center" [ngClass]="{'active': (selectedTab == 6)}">
+                <h4 class="glyphicon glyphicon-credit-card"></h4>
+                <br/>IdProofs Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Comment : Here Tabs content section START's here -->
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+
+            <!-- Comment : Here [Assessor PrimaryDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 0)}" class="bhoechie-tab-content" *ngIf="selectedTab == 0">
+              <div>
+                <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
+                <h2 style="margin-top: 0;color:#55518a;text-decoration: underline">Primary Details</h2>
+                <h3 style="margin-top: 0;color:#55518a"></h3>
+
+                <div class="card-block">
+                  <div class="card-body">
+                    <div class="">
+                      <fieldset [disabled]="disableFormSubmit == 1">
+                        <div class="form-group row">
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-md-4 col-lg-6 label-control" style="color:green;text-align: left;" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-md-4 col-lg-3 label-control">IRIS Id</label>
+                          <div class="col-md-6 col-lg-5">
+                            <input type="text" name="txt_IRIS_Id" id="txt_IRIS_Id" [(ngModel)]="assessor.IRIS_Id" class="form-control field-sm" placeholder=""
+                              ng-maxlength="30" maxlength="30" #txt_IRIS_Id="ngModel" required>
+                          </div>
+                        </div>
+                        <div class="form-group row" *ngIf="(formSubmitted && !txt_IRIS_Id.valid)">
+                          <label class="col-md-4 col-lg-3 label-control"></label>
+                          <div class="col-md-6 col-lg-2">
+                            <span class="error">IRIS Id is required</span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-md-4 col-lg-3 label-control">SSC Id</label>
+                          <div class="col-md-6 col-lg-5">
+                            <input type="text" name="txt_SSC_Id" id="txt_SSC_Id" [(ngModel)]="assessor.SSC_Id" class="form-control field-sm" placeholder=""
+                              ng-maxlength="20" maxlength="20" #txt_SSC_Id="ngModel" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-md-4 col-lg-3 label-control">NSDC Id</label>
+                          <div class="col-md-6 col-lg-5">
+                            <input type="text" name="txt_NSDC_Id" id="txt_NSDC_Id" [(ngModel)]="assessor.NSDC_Id" class="form-control field-sm" placeholder=""
+                              ng-maxlength="20" maxlength="20" #txt_NSDC_Id="ngModel" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-md-4 col-lg-4 label-control"></label>
+                          <div class="col-md-6 col-lg-3 text-right">
+                            <div class="field-lg">
+                              <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetFormDetails()">
+                                <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                              <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; submitAssessorBasicDetails();">
+                                <i class="ft-search mr-half"></i>Submit </a>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment : Here [AssessorPersonalDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 1)}" class="bhoechie-tab-content">
+              <!-- Personal Detail Components here -->
+              <app-accessor-personal-detail [disableFormSubmit]="(disableFormSubmit == 1 ? 0:1)" [assessorId]="assessor.Id" [assessorPersonalDetailFromParent]="assessor.PerosnalDetail">Peronal details loading, please wait...</app-accessor-personal-detail>
+            </div>
+
+            <!-- Comment : Here [AssessorCommunicationDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 2)}" class="bhoechie-tab-content">
+              <!-- Communication Detail Components here -->
+              <app-accessor-communication-detail [disableFormSubmit]="(disableFormSubmit == 1 ? 0:1)" [assessorId]="assessor.Id" [assessorCommunicationDetailFromParent]="assessor.CommunicationDetail">Communication details loading, please wait...</app-accessor-communication-detail>
+            </div>
+
+            <!-- Comment : Here [AssessorOtherDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 3)}" class="bhoechie-tab-content">
+              <!-- Other Detail Components here -->
+              <app-accessor-other-detail [disableFormSubmit]="(disableFormSubmit == 1 ? 0:1)" [assessorId]="assessor.Id" [assessorOtherDetailFromParent]="assessor.OtherDetail">Other details loading, please wait...</app-accessor-other-detail>
+            </div>
+
+            <!-- Comment : Here [AssessorJobRoleDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 4)}" class="bhoechie-tab-content">              
+              <!-- Other Detail Components here -->
+              <app-assesor-job-role-detail [assessorId]="assessor.Id" [assessorJobRoleDetailFromParent]="assessor.JobRoles">JobRole details loading, please wait...</app-assesor-job-role-detail>
+            </div>
+
+            <!-- Comment : Here [AssessorPreferredLocationDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 5)}" class="bhoechie-tab-content">
+              <div>
+                <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
+                <h2 style="margin-top: 0;color:#55518a">Assessor Preferred-Locations</h2>
+                <h3 style="margin-top: 0;color:#55518a"></h3>
+              </div>
+            </div>
+
+            <!-- Comment : Here [AssessorIdProofDetails] Section -->
+            <div [ngClass]="{'active': (selectedTab == 6)}" class="bhoechie-tab-content">
+              <div>
+                <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
+                <h2 style="margin-top: 0;color:#55518a">Assessor Id-Proof Data</h2>
+                <h3 style="margin-top: 0;color:#55518a"></h3>
+              </div>
+            </div>
+
+            <!-- Comment : Here Tabs content section END's here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,66 +1,69 @@
 <hr/>
 
 <div class="app-content content container-fluid">
-<div class="content-wrapper">
-    <div class="content-header row">
-        <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
-            <h3 class="content-header-title">Search Scheme</h3>
-        </div>
-        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
-            <div class="breadcrumb-wrapper col-xs-12 pl-0">
-                <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
-                    <li class="breadcrumb-item"><a routerLink="../">DASHBOARD</a>
-                    </li>
-                    <li class="breadcrumb-item active">Search Scheme</li>
-                </ol>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-xs-12 col-md-5 col-xs-12 mb-1">
+                <h3 class="content-header-title">Search Scheme</h3>
+            </div>
+            <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-7 col-xs-12 text-sm-left">
+                <div class="breadcrumb-wrapper col-xs-12 pl-0">
+                    <ol class="breadcrumb float-xs-left float-sm-left float-md-right mb-1">
+                        <li class="breadcrumb-item">
+                            <a routerLink="../">DASHBOARD</a>
+                        </li>
+                        <li class="breadcrumb-item active">Search Scheme</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="content-body">
-        <!-- Analytics spakline & chartjs  -->
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-xs-12">
-                <div class="card form-card form-advance-block new-customer">
-                    <div class="card-block">
-                        <form class="form form-horizontal" action="#">
-                            <div class="form-advance-block">
-                                <div class="card collapse-icon accordion-icon-rotate">
-                                    <div class="card-block">
-                                        <div class="card-body">
-                                            <div class="">
-                                                <div class="form-group row">                                                    
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 col-lg-2 label-control">Scheme Code</label>
-                                                    <div class="col-md-4 col-lg-3">
-                                                        <input type="text" class="form-control field-sm" placeholder="">
+        <div class="content-body">
+            <!-- Analytics spakline & chartjs  -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="card form-card form-advance-block new-customer">
+                        <div class="card-block">
+                            <form class="form form-horizontal" action="#">
+                                <div class="form-advance-block">
+                                    <div class="card collapse-icon accordion-icon-rotate">
+                                        <div class="card-block">
+                                            <div class="card-body">
+                                                <div class="">
+                                                    <div class="form-group row">
                                                     </div>
-                                                    <label class="col-md-2 col-lg-2 label-control">Scheme Name</label>
-                                                    <div class="col-md-4 col-lg-3">
-                                                        <fieldset class="form-group position-relative mb-0 field-sm">
-                                                            <input type="text" class="form-control" placeholder="" value="">
-                                                            <div class="form-control-position">
-                                                                <i class="ft-search primary"></i>
-                                                            </div>
-                                                        </fieldset>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-lg-2 label-control">Scheme Code</label>
+                                                        <div class="col-md-4 col-lg-3">
+                                                            <input type="text" name="txt_SchemeCode" id="txt_SchemeCode" [(ngModel)]="searchParams.Code" class="form-control field-sm"
+                                                                placeholder="">
+                                                        </div>
+                                                        <label class="col-md-2 col-lg-2 label-control">Scheme Name</label>
+                                                        <div class="col-md-4 col-lg-3">
+                                                            <fieldset class="form-group position-relative mb-0 field-sm">
+                                                                <input type="text" name="txt_SchemeName" id="txt_SchemeName" [(ngModel)]="searchParams.Name" class="form-control field-sm"
+                                                                    placeholder="">
+                                                                <div class="form-control-position">
+                                                                    <i class="ft-search primary"></i>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group btn-grp advance-search-btns clearfix">
-                                        <div class="col-sm-10 text-right">
-                                            <a href="#" class="btn btn-outline-primary">
-                                                <i class="ft-refresh-ccw mr-half"></i> Reset </a>
-                                            <a href="#" class="btn btn-primary search-quote">
-                                                <i class="ft-search mr-half"></i>Search </a>
+                                        <div class="form-group btn-grp advance-search-btns clearfix">
+                                            <div class="col-sm-10 text-right">
+                                                <a href="#" class="btn btn-outline-primary">
+                                                    <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                                                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="searchSchemes()">
+                                                    <i class="ft-search mr-half"></i>Search </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- <fieldset disabled>
+                            </form>
+                        </div>
+                        <!-- <fieldset disabled>
                             <input/>
                             <input/>
                             <input/>
@@ -72,11 +75,17 @@
                                 <option value="3">this</option>
                             </select>
                         </fieldset> -->
-                    <!-- Comment : Here include listof-scheme components -->
-                    <app-listof-scheme>Loading, please wait..</app-listof-scheme>
-                </div>                
+
+                        <div class="col-sm-10 text-left">
+                            <a class="btn btn-outline" routerLink="add" style="font-weight: bold">
+                                <i class="ft-refresh-ccw mr-half"></i> ++ Add Scheme </a>
+                        </div>
+
+                        <!-- Comment : Here include listof-scheme components -->
+                        <app-listof-scheme (selectedScheme)="parentMethod($event)">Loading, please wait..</app-listof-scheme>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

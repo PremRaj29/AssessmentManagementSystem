@@ -3,18 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent} from '../components/masters/dashboard/dashboard.component';
 //import { ManageJobRoleComponent} from '../components/masters/manage-job-role/manage-job-role.component';
-import { ManageSchemeComponent} from '../components/masters/manage-scheme/manage-scheme.component';
+//import { ManageSchemeComponent} from '../components/masters/manage-scheme/manage-scheme.component';
 import { ManageVtpComponent} from '../components/masters/manage-vtp/manage-vtp.component';
-import { ManageSkillCouncilComponent } from '../components/masters/manage-skill-council/manage-skill-council.component';
+//import { ManageSkillCouncilComponent } from '../components/masters/manage-skill-council/manage-skill-council.component';
 
 export const routes : Routes = [
   //{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '', component: DashboardComponent },
+
   //{ path: 'job-role', component: ManageJobRoleComponent },
   { path: 'job-role', loadChildren: './manage-job-role.module#ManageJobRoleModule' },
-  { path: 'scheme', component: ManageSchemeComponent },
-  { path: 'vtp', component: ManageVtpComponent },
-  { path: 'skill-council', component: ManageSkillCouncilComponent },
+
+  //{ path: 'scheme', component: ManageSchemeComponent },
+  { path: 'scheme', loadChildren: './manage-scheme.module#ManageSchemeModule' },
+
+  //{ path: 'vtp', component: ManageVtpComponent },
+  { path: 'vtp', loadChildren: './manage-vtp.module#ManageVtpModule' },
+  
+  //{ path: 'skill-council', component: ManageSkillCouncilComponent },
+  { path: 'skill-council', loadChildren: './manage-skill-council.module#ManageSkillCouncilModule' },
 ];
 
 @NgModule({

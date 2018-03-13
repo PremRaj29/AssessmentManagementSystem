@@ -28,6 +28,13 @@ namespace AMS.API.Controllers
             return Ok(GetVocationalTrainingProviderDbService().GetVocationalTrainingProvider(new VocationalTrainingProviderRequestParams() { Id = vocationalTrainingProviderId }));
         }
 
+        //Get: SearchScheme
+        [Route("VocationalTrainingProvider/Search")]
+        public IHttpActionResult GetSearchedVtps(string vtpCode, string vtpName)
+        {
+            return Ok(GetVocationalTrainingProviderDbService().SearchVtps(vtpCode, vtpName));
+        }
+
         //Post: VocationalTrainingProvider
         /// <summary>
         /// Create/Add new VocationalTrainingProvider

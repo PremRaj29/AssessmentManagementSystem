@@ -81,7 +81,7 @@ namespace AMS.API.DTO
         /// <summary>
         /// For Internal use by the Insurance Service only.  Read-only identifier of the primary record associated with the request.  Captured in event logging.  (e.g. - for Questions GET requests, this would be the QuoteID value.)
         /// </summary>
-        public int RecordKey { get; set; }
+        public long RecordKey { get; set; }
 
         #endregion
     }

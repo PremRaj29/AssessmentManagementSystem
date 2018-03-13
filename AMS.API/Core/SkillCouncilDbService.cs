@@ -206,6 +206,61 @@ namespace AMS.API.Core
 
         #endregion
 
+        #region Comment : Here Custom Methods
+
+        /// <summary>
+        /// Return list of Skill councils based on supplied Search-Parameters
+        /// </summary>
+        /// <returns></returns>
+        SkillCouncilResponse ISkillCouncilDbService.SearchSkillCouncils(SearchSkillCouncilsRequestParams request)
+        {
+            SkillCouncilResponse skillCouncilsResponse = new SkillCouncilResponse();
+
+            try
+            {
+                var dbSet = GetDbConnector().LoadDataSet("SearchSkillCouncils", QueryCommandType.StoredProcedure,
+                                            new List<System.Data.IDbDataParameter>
+                                            {
+                                                new SqlParameter() { ParameterName = "@SkillCouncilCode", Value = request.Code, SqlDbType = SqlDbType.VarChar, Size=10 },
+                                                new SqlParameter() { ParameterName = "@SkillCouncilName", Value = request.Name, SqlDbType = SqlDbType.VarChar, Size=500 },
+                                                new SqlParameter() { ParameterName = "@SkillCouncilTypeId", Value = request.SkillCouncilTypeId, SqlDbType = SqlDbType.Int }
+                                            });
+
+                //Comment : Here fill & return generic list from DbSet
+                var listSkillCouncils = new List<SkillCouncil>();
+                if (dbSet != null && dbSet.Tables.Count > 0)
+                {
+                    foreach (DataRow dataRow in dbSet.Tables[0].Rows)
+                    {
+                        listSkillCouncils.Add(
+                            new SkillCouncil()
+                            {
+                                Id = Convert.ToInt32(dataRow["SkillCouncilId"]),
+                                CouncilTypeId = Convert.ToInt32(dataRow["CouncilTypeId"]),
+                                CouncilType = dataRow["CouncilTypeName"].ToString(),
+                                Code = dataRow["Code"].ToString(),
+                                FullName = dataRow["FullName"].ToString(),
+                                Description = dataRow["Description"].ToString(),
+                                IsActive = Convert.ToBoolean((dataRow["IsActive"] == DBNull.Value || dataRow["IsActive"] == null) ? 0 : dataRow["IsActive"])
+                            });
+                    }
+                }
+
+                //assign fecthed list
+                skillCouncilsResponse.SkillCouncil = listSkillCouncils;
+                skillCouncilsResponse.OperationStatus = new OperationStatus { ServiceName = "SearchSkillCouncils", ServiceMethod = "Get", RequestProcessed = true, RequestSuccessful = true };
+            }
+            catch (Exception ex)
+            {
+                skillCouncilsResponse.OperationStatus = new OperationStatus { Messages = new List<Message>() { new Message() { DTOName = "SkillCouncil", DTOProperty = "", MessageType = MessageType.SystemError, Text = ex.Message } }, RequestProcessed = true, RequestSuccessful = false };
+
+            }
+
+            return skillCouncilsResponse;
+        }
+
+        #endregion
+
         #endregion
 
         #region Private Methods
@@ -230,8 +285,8 @@ namespace AMS.API.Core
             //if successfully executed
             if (rowEffeted > 0)
             {
-                Int32 jobRoleId = Convert.ToInt32(parameterList[parameterList.Count() - 1].Value);
-                return jobRoleId;
+                Int32 skillCouncilId = Convert.ToInt32(parameterList[parameterList.Count() - 1].Value);
+                return skillCouncilId;
             }
             else
             {

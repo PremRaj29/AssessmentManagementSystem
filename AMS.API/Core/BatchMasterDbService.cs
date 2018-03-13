@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Data;
 using AMS.API.DTO;
 using AMS.API.DTO.BatchMaster;
+using AMS.API.DTO.BatchAllocation;
+using ASSESSOR = AMS.API.DTO.Assessor;
 
 namespace AMS.API.Core
 {
@@ -41,6 +43,8 @@ namespace AMS.API.Core
                 var listBatchMaster = new List<BatchMaster>();
                 if (dbSet != null && dbSet.Tables.Count > 0)
                 {
+                    #region STEP-1. Get BatchMaster Related Details
+
                     foreach (DataRow dataRow in dbSet.Tables[0].Rows)
                     {
                         listBatchMaster.Add(
@@ -66,7 +70,7 @@ namespace AMS.API.Core
                                     VTP_SPOC_Mobile2 = dataRow["VTP_SPOC_Mobile2"].ToString(),
                                     VTP_SPOC_AlternativeNo = dataRow["VTP_SPOC_AlternativeNo"].ToString(),
                                     VTP_Address = dataRow["VTP_Address"].ToString(),
-                                    Centre_SPOC_Name =  dataRow["Centre_SPOC_Name"].ToString(),
+                                    Centre_SPOC_Name = dataRow["Centre_SPOC_Name"].ToString(),
                                     Centre_SPOC_Email = dataRow["Centre_SPOC_Email"].ToString(),
                                     Centre_SPOC_Mobile = dataRow["Centre_SPOC_Mobile"].ToString(),
 
@@ -91,6 +95,52 @@ namespace AMS.API.Core
                                 IsActive = Convert.ToBoolean((dataRow["IsActive"] == DBNull.Value || dataRow["IsActive"] == null) ? 0 : dataRow["IsActive"])
                             });
                     }
+
+                    #endregion
+
+                    #region STEP-2. Get BatchAllocation Related Details
+
+                    Int64 assessorId = 0;
+
+                    foreach (DataRow dataRow in dbSet.Tables[1].Rows)
+                    {
+                        //hold assessor-id
+                        assessorId = Convert.ToInt64(dataRow["AssessorId"]);
+
+                        //Comment": Here data for BatchAllocationDetails
+                        listBatchMaster[0].BatchAllocationDetails = new BatchAllocationDetail()
+                        {
+                            BatchMasterId = Convert.ToInt64(dataRow["AllocatedBatchId"]),
+                            BatchId = dataRow["BatchId"].ToString(),
+                            BatchName = dataRow["BatchName"].ToString(),
+                            BatchAllocationId = Convert.ToInt64(dataRow["BatchAllocationId"]),
+                            AssessmentDate = Convert.ToDateTime(dataRow["AllocatedAssessmentDate"]),
+                            AssessmentTiming = Convert.ToBoolean(dataRow["AllocatedAssessmentTiming"]),
+                            Assessor = new ASSESSOR.Assessor()
+                            {
+                                Id = assessorId,
+
+                                //Comment": Here data for BatchDetails
+                                PerosnalDetail = new ASSESSOR.AssessorPersonalDetail()
+                                {
+                                    AssessorId = assessorId,
+                                    Name = dataRow["AssessorName"].ToString(),
+                                },
+
+                                CommunicationDetail = new ASSESSOR.AssessorCommunicationDetail()
+                                {
+                                    AssessorId = assessorId,
+                                    EmailId = dataRow["EmailId"].ToString(),
+                                    MobileNo = dataRow["MobileNo"].ToString(),
+                                    WhatsAppNo = dataRow["WhatsAppNo"].ToString(),
+                                    StateName = dataRow["StateName"].ToString(),
+                                    CityName = dataRow["CityName"].ToString(),
+                                },
+                            }
+                        };
+                    }
+
+                    #endregion
                 }
 
                 //assign fecthed list
@@ -150,7 +200,7 @@ namespace AMS.API.Core
             #endregion            
 
             return operationStatus;
-        }        
+        }
 
         #endregion
 

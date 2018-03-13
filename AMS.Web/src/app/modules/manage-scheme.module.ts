@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManageSchemeComponent } from '../components/masters/manage-scheme/manage-scheme.component';
-import { AddSchemeComponent } from '../components/masters/manage-scheme/add-scheme/add-scheme.component';
-import { ModifySchemeComponent } from '../components/masters/manage-scheme/modify-scheme/modify-scheme.component';
+import { FormsModule } from '@angular/forms';
+
+//import custom components
+import {ManageSchemeRoutingModule,routedSchemeComponents} from '../modules/manage-scheme-routing.module';
 import { ListofSchemeComponent } from '../components/masters/manage-scheme/listof-scheme/listof-scheme.component';
+
+// custom providers
+import { SchemeService } from '../services/manage-scheme/scheme.service';
 
 @NgModule({
   imports: [
     CommonModule
+    ,FormsModule
+    ,ManageSchemeRoutingModule
   ],
-  declarations: [ManageSchemeComponent, AddSchemeComponent, ModifySchemeComponent, ListofSchemeComponent]
+  declarations: [routedSchemeComponents, ListofSchemeComponent],
+  providers: [SchemeService]
 })
 export class ManageSchemeModule { }

@@ -1,3 +1,128 @@
-<p>
-  assessor-list works!
-</p>
+<!-- Comment : Here Searched "Assessor" Panel -->
+<div class="table-responsive pt-0 search-quote-table card-block">
+  <div id="example_wrapper" class="dataTables_wrapper no-footer">
+    <!-- <div class="dataTables_length" id="example_length">
+        <label>Show                     
+            <select name="example_length" aria-controls="example" class="">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="-1">25</option>
+            </select> entries                
+        </label>
+    </div> -->
+    <table id="myTable" class="table table-bordered table-striped table-cust dataTable no-footer tbl" role="grid" aria-describedby="example_info">
+      <thead>
+        <tr role="row">
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Id: activate to sort column descending"
+            style="width: 0px;">Sr. No.</th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Name: activate to sort column descending"
+            style="width: 0px;">Assessor Name</th>
+          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"
+            style="width: 0px;">Email</th>
+          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Mobile No: activate to sort column ascending"
+            style="width: 0px;">Mobile No</th>
+          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="State Name: activate to sort column ascending"
+            style="width: 0px;">State Name</th>
+          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="City Name: activate to sort column ascending"
+            style="width: 0px;">City Name</th>
+            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Allocation: activate to sort column ascending"
+            style="width: 0px;">Allocate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr role="row" class="odd" *ngFor="let matchingAssessor of searchedBatchMatchingAssessor;let searialNo = index">
+            <td class="sorting_1">{{searialNo + 1}}</td>
+            <td>{{matchingAssessor.PerosnalDetail?.Name}}</td>
+            <td>{{matchingAssessor.CommunicationDetail?.EmailId}}</td>
+            <td>{{matchingAssessor.CommunicationDetail?.MobileNo}}</td>
+            <td>{{matchingAssessor.CommunicationDetail?.StateName}}</td>
+            <td>{{matchingAssessor.CommunicationDetail?.CityName}}</td>
+            <td>
+              <a style="font-weight: bold;text-decoration:underline" (click)="allocateAssessorOnBatch(matchingAssessor.Id)">Map </a>
+            </td>
+        </tr>
+        <tr *ngIf="!searchedBatchMatchingAssessor && !isDataLoadingCompleted">
+            <td colspan="4">Loading matching-assessors for batch. Please wait...</td>
+        </tr>
+        <tr *ngIf="searchedBatchMatchingAssessor == null && isDataLoadingCompleted">
+            <td colspan="6" style="text-align:center;color:red">No assessor found !!</td>
+        </tr>
+    </tbody>
+
+      <!-- <tbody>
+        <tr role="row" class="odd">
+          <td class="sorting_1">
+            #1
+          </td>
+          <td>Prem Pratap Singh</td>
+          <td>prem.rajp@gnmail.com</td>
+          <td>8447484080</td>
+          <td>Rajasthan</td>
+          <td>Jaipur</td>
+          <td>
+            <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
+              <i class="ft-refresh-ccw mr-half"></i> Map </a>
+          </td>
+        </tr>
+        <tr role="row" class="odd">
+          <td class="sorting_1">
+            #2
+          </td>
+          <td>Nishank</td>
+          <td>nishank.rajp@gnmail.com</td>
+          <td>7631097654</td>
+          <td>Rajasthan</td>
+          <td>Udaipur</td>
+          <td>
+              <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
+                <i class="ft-refresh-ccw mr-half"></i> Map </a>
+            </td>
+        </tr>
+        <tr role="row" class="odd">
+          <td class="sorting_1">
+            #3
+          </td>
+          <td>Amit Kumar</td>
+          <td>amit.kumar@gnmail.com</td>
+          <td>9077484080</td>
+          <td>Rajasthan</td>
+          <td>Bikaner</td>
+          <td>
+              <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
+                <i class="ft-refresh-ccw mr-half"></i> Map </a>
+            </td>
+        </tr>
+        <tr role="row" class="odd">
+          <td class="sorting_1">
+            #4
+          </td>
+          <td>Anuj Singh</td>
+          <td>anuj.singh@gnmail.com</td>
+          <td>9876666970</td>
+          <td>Andhrapradesh</td>
+          <td>Guntoor</td>
+          <td>
+              <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
+                <i class="ft-refresh-ccw mr-half"></i> Map </a>
+            </td>
+        </tr>
+        <tr *ngIf="!searchedJobRoles && !isDataLoadingCompleted">
+                              <td colspan="4">Loading batch-master. Please wait...</td>
+                            </tr>
+                            <tr *ngIf="searchedBatchMaster == null && isDataLoadingCompleted">
+                              <td colspan="6" style="text-align:center;color:red">No batch-master found !!</td>
+                            </tr>
+      </tbody> -->
+    </table>
+    <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 6 entries</div>
+    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+        <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
+        <span>
+            <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
+            <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
+        </span>
+        <a class="paginate_button next" aria-controls="example" data-dt-idx="3" tabindex="0" id="example_next">Next</a>
+    </div> -->
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { GeographyResponse } from '../../models/geography/geography-response';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 // import Domain class
 
@@ -21,7 +22,7 @@ export class ListofGeographyService {
 
   //#region global level propertie/variables/models declaration & initlizations
 
-  private geographyRequestUrl: string = 'http://localhost/AMS.Services/api/Geography/';
+  private geographyRequestUrl: string = environment.apiUrl + 'Geography/';
   private requestUrl: string = null;
   private requestOptions: RequestOptions;
 
@@ -35,7 +36,7 @@ export class ListofGeographyService {
    */
   getStates(stateId?: number): Observable<GeographyResponse> {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/Geography/State/2
+    //reference-url : http://{Path}/AMS.Services/api/Geography/State/2
 
     // comment : here manipulate url string
     this.requestUrl = this.geographyRequestUrl + `State/${stateId || '0'}`;
@@ -51,7 +52,7 @@ export class ListofGeographyService {
    */
   getCities(stateId: number, cityId: number=0): Observable<GeographyResponse> {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/Geography/State/2/City/5
+    //reference-url : http://{Path}/AMS.Services/api/Geography/State/2/City/5
 
     // comment : here manipulate url string
     this.requestUrl = this.geographyRequestUrl + `State/${stateId || '0'}/City/${cityId || '0'}`;

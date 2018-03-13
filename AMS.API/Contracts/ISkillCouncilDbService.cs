@@ -37,5 +37,11 @@ namespace AMS.API.Contracts
         /// <param name="data"></param>
         /// <returns></returns>
         OperationStatus UpdateSkillCouncil(SkillCouncil data);
+
+        /// <summary>
+        /// Return list of Skill councils based on supplied Search-Parameters
+        /// </summary>
+        /// <returns></returns>
+        SkillCouncilResponse SearchSkillCouncils(SearchSkillCouncilsRequestParams request);
     }
 }

@@ -11,10 +11,10 @@ namespace AMS.API.DTO.Assessor
     {
         public Int64 AssessorId { get; set; }
 
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
 
         [Required]
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         public string CityName { get; set; }
 
@@ -31,7 +31,7 @@ namespace AMS.API.DTO.Assessor
         [StringLength(10)]
         public string MobileNo { get; set; }
 
-        public bool WhatsAppOnPrimaryNo { get; set; }
+        public bool? WhatsAppOnPrimaryNo { get; set; }
 
         [StringLength(10)]
         public string WhatsAppNo { get; set; }
@@ -64,7 +64,7 @@ namespace AMS.API.DTO.Assessor
         [StringLength(5)]
         public string CommAddressPinCode { get; set; }
 
-        public bool HasSameAsCommAddress { get; set; }
+        public bool? HasSameAsCommAddress { get; set; }
 
         [StringLength(50)]
         public string PermanentAddressLine1 { get; set; }

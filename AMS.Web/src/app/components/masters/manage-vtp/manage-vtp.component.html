@@ -33,12 +33,14 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-2 col-lg-2 label-control">VTP Code</label>
                                                     <div class="col-md-4 col-lg-3">
-                                                        <input type="text" class="form-control field-sm" placeholder="">
+                                                            <input type="text" name="txt_VtpCode" id="txt_VtpCode" [(ngModel)]="searchParams.Code" class="form-control field-sm"
+                                                            placeholder="">
                                                     </div>
                                                     <label class="col-md-2 col-lg-2 label-control">VTP Name</label>
                                                     <div class="col-md-4 col-lg-3">
                                                         <fieldset class="form-group position-relative mb-0 field-sm">
-                                                            <input type="text" class="form-control" placeholder="" value="">
+                                                                <input type="text" name="txt_VtpName" id="txt_VtpName" [(ngModel)]="searchParams.Name" class="form-control field-sm"
+                                                                placeholder="">
                                                             <div class="form-control-position">
                                                                 <i class="ft-search primary"></i>
                                                             </div>
@@ -52,7 +54,7 @@
                                         <div class="col-sm-10 text-right">
                                             <a href="#" class="btn btn-outline-primary">
                                                 <i class="ft-refresh-ccw mr-half"></i> Reset </a>
-                                            <a href="#" class="btn btn-primary search-quote">
+                                            <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="searchVtps()">
                                                 <i class="ft-search mr-half"></i>Search </a>
                                         </div>
                                     </div>
@@ -72,8 +74,14 @@
                                 <option value="3">this</option>
                             </select>
                         </fieldset> -->
+
+                        <div class="col-sm-10 text-left">
+                                <a class="btn btn-outline" routerLink="add" style="font-weight: bold">
+                                    <i class="ft-refresh-ccw mr-half"></i> ++ Add VTP </a>
+                            </div>
+
                     <!-- Comment : Here include listof-VTP components -->
-                    <app-listof-vtp>Loading, please wait..</app-listof-vtp>
+                    <app-listof-vtp (selectedVtp)="parentMethod($event)">Loading, please wait..</app-listof-vtp>
                 </div>                
             </div>
         </div>

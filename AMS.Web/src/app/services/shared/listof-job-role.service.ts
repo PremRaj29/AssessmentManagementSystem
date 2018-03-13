@@ -9,6 +9,7 @@ import { JobRoleResponse } from '../../models/manage-job-role/job-role-response'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 
 // import Domain class
@@ -22,7 +23,7 @@ export class ListofJobRoleService {
 
   //#region global level propertie/variables/models declaration & initlizations
 
-  private jobRoleRequestUrl: string = 'http://localhost/AMS.Services/api/SkillCouncil/';
+  private jobRoleRequestUrl: string = environment.apiUrl + 'SkillCouncil/';
   private requestUrl: string = null;
   private requestOptions: RequestOptions;
 
@@ -37,7 +38,7 @@ export class ListofJobRoleService {
   getJobRoles(skillCouncilId: number) : Observable<JobRoleResponse>
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/SkillCouncil/2/JobRole
+    //reference-url : http://{Path}/AMS.Services/SkillCouncil/2/JobRole
 
     // comment : here manipulate url string
     this.requestUrl  = this.jobRoleRequestUrl + `${skillCouncilId || '0'}/JobRole`;

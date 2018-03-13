@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+//custom components,service, pipe
+import { AssessmentTimingPipe } from '../../pipes/assessment-timing.pipe';
+
 //#endregion
 
 //#region module decorator & defination
@@ -12,9 +15,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule, FormsModule
   ],
-  declarations: []
+  declarations: [AssessmentTimingPipe]
   ,exports: [
-    CommonModule, FormsModule
+    CommonModule, FormsModule,AssessmentTimingPipe
   ]
 })
 export class SharedModule { }

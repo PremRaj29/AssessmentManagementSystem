@@ -61,10 +61,14 @@
                   </div>
                 </div>
               </form>
-            </div>
+            </div>            
             <div [hidden]="searchedBatchMasterId == 0">
               <!-- Comment : Here include batch-master-details components -->
               <app-batch-details (searchedBatchMasterId)="parentMethod($event)">Loading, please wait..</app-batch-details>
+            </div>
+            <!-- Comment : Here show error if no record found -->
+            <div *ngIf="searchBatchFormSubmitted && isDataLoadingCompleted && searchedBatchMasterId == 0" style="text-align:center;color:red">              
+                Batch Master details does not exists
             </div>
 
             <!-- Comment : Here Assessor Search Panel -->
@@ -86,15 +90,15 @@
                       <label class="col-md-2 col-lg-2 label-control">Assessment Date</label>
                       <div class="col-md-4 col-lg-3">
                         <input type="text" name="txt_AssessmentDate" id="txt_AssessmentDate" [(ngModel)]="searchAssessorParams.AssessmentDate" class="form-control field-sm"
-                          placeholder="">
+                          placeholder="yyyy-mm-dd">
                       </div>
                       <label class="col-md-2 col-lg-2 label-control">Schedule Timing</label>
                       <div class="col-md-4 col-lg-3">
                         <select class="form-control field-sm" name="ddl_ScheduleTiming" id="ddl_ScheduleTiming" [(ngModel)]="searchAssessorParams.AssessmentTiming"
                           (ngModelChange)="onScheduleTimingChange($event)" #ddl_ScheduleTiming="ngModel" required>
-                          <option value="null" disabled>Select</option>
-                          <option value="1">Morning</option>
-                          <option value="2">Evening</option>
+                          <option [value]="null" disabled>Select</option>
+                          <option [value]="false">Morning</option>
+                          <option [value]="true">Evening</option>
                         </select>
                       </div>
                     </div>
@@ -119,113 +123,9 @@
                 </div>
               </div>
 
-              <!-- Comment : Here Searched "Assessor" Panel -->
-              <div class="table-responsive pt-0 search-quote-table card-block" [hidden]="!searchBatchAssessorFormSubmitted">
-                <div id="example_wrapper" class="dataTables_wrapper no-footer">
-                  <!-- <div class="dataTables_length" id="example_length">
-                      <label>Show                     
-                          <select name="example_length" aria-controls="example" class="">
-                              <option value="5">5</option>
-                              <option value="10">10</option>
-                              <option value="20">20</option>
-                              <option value="-1">25</option>
-                          </select> entries                
-                      </label>
-                  </div> -->
-                  <table id="myTable" class="table table-bordered table-striped table-cust dataTable no-footer tbl" role="grid" aria-describedby="example_info">
-                    <thead>
-                      <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Id: activate to sort column descending"
-                          style="width: 0px;">Sr. No.</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Assessor Name: activate to sort column descending"
-                          style="width: 0px;">Assessor Name</th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"
-                          style="width: 0px;">Email</th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Mobile No: activate to sort column ascending"
-                          style="width: 0px;">Mobile No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="State Name: activate to sort column ascending"
-                          style="width: 0px;">State Name</th>
-                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="City Name: activate to sort column ascending"
-                          style="width: 0px;">City Name</th>
-                          <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Allocation: activate to sort column ascending"
-                          style="width: 0px;">Allocate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr role="row" class="odd">
-                        <td class="sorting_1">
-                          #1
-                        </td>
-                        <td>Prem Pratap Singh</td>
-                        <td>prem.rajp@gnmail.com</td>
-                        <td>8447484080</td>
-                        <td>Rajasthan</td>
-                        <td>Jaipur</td>
-                        <td>
-                          <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
-                            <i class="ft-refresh-ccw mr-half"></i> Map </a>
-                        </td>
-                      </tr>
-                      <tr role="row" class="odd">
-                        <td class="sorting_1">
-                          #2
-                        </td>
-                        <td>Nishank</td>
-                        <td>nishank.rajp@gnmail.com</td>
-                        <td>7631097654</td>
-                        <td>Rajasthan</td>
-                        <td>Udaipur</td>
-                        <td>
-                            <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
-                              <i class="ft-refresh-ccw mr-half"></i> Map </a>
-                          </td>
-                      </tr>
-                      <tr role="row" class="odd">
-                        <td class="sorting_1">
-                          #3
-                        </td>
-                        <td>Amit Kumar</td>
-                        <td>amit.kumar@gnmail.com</td>
-                        <td>9077484080</td>
-                        <td>Rajasthan</td>
-                        <td>Bikaner</td>
-                        <td>
-                            <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
-                              <i class="ft-refresh-ccw mr-half"></i> Map </a>
-                          </td>
-                      </tr>
-                      <tr role="row" class="odd">
-                        <td class="sorting_1">
-                          #4
-                        </td>
-                        <td>Anuj Singh</td>
-                        <td>anuj.singh@gnmail.com</td>
-                        <td>9876666970</td>
-                        <td>Andhrapradesh</td>
-                        <td>Guntoor</td>
-                        <td>
-                            <a class="btn btn-outline" style="font-weight: bold;text-decoration:underline">
-                              <i class="ft-refresh-ccw mr-half"></i> Map </a>
-                          </td>
-                      </tr>
-                      <!-- <tr *ngIf="!searchedJobRoles && !isDataLoadingCompleted">
-                                            <td colspan="4">Loading batch-master. Please wait...</td>
-                                          </tr>
-                                          <tr *ngIf="searchedBatchMaster == null && isDataLoadingCompleted">
-                                            <td colspan="6" style="text-align:center;color:red">No batch-master found !!</td>
-                                          </tr> -->
-                    </tbody>
-                  </table>
-                  <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 6 entries</div>
-                  <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                      <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
-                      <span>
-                          <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
-                          <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
-                      </span>
-                      <a class="paginate_button next" aria-controls="example" data-dt-idx="3" tabindex="0" id="example_next">Next</a>
-                  </div> -->
-                </div>
+              <div [hidden]="!searchBatchAssessorFormSubmitted">
+                <!-- Comment : Here include batch-matching "Accessot List" components -->
+                <app-batch-matching-assessor-list [searchedBatchMasterId]="searchedBatchMasterId">Loading, please wait..</app-batch-matching-assessor-list>
               </div>
             </div>
           </div>

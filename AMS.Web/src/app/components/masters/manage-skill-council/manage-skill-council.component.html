@@ -33,12 +33,14 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-2 col-lg-2 label-control">SkillCouncil Code</label>
                                                     <div class="col-md-4 col-lg-3">
-                                                        <input type="text" class="form-control field-sm" placeholder="">
+                                                        <input type="text" name="txt_SkillCouncilCode" id="txt_SkillCouncilCode" [(ngModel)]="searchParams.Code" class="form-control field-sm"
+                                                                placeholder="">
                                                     </div>
                                                     <label class="col-md-2 col-lg-2 label-control">SkillCouncil Name</label>
                                                     <div class="col-md-4 col-lg-3">
                                                         <fieldset class="form-group position-relative mb-0 field-sm">
-                                                            <input type="text" class="form-control" placeholder="" value="">
+                                                            <input type="text" name="txt_SkillCouncilName" id="txt_SkillCouncilName" [(ngModel)]="searchParams.Name" class="form-control field-sm"
+                                                                placeholder="">
                                                             <div class="form-control-position">
                                                                 <i class="ft-search primary"></i>
                                                             </div>
@@ -48,11 +50,12 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-2 col-lg-2 label-control">SkillCouncil Type</label>
                                                     <div class="col-md-4 col-lg-3">
-                                                        <select class="form-control field-sm">
+                                                        <!-- <select class="form-control field-sm">
                                                             <option disabled="" selected="" hidden="">Select</option>
                                                             <option value="1">Sector Skill Council(SSC)</option>
                                                             <option value="2">School</option>
-                                                        </select>
+                                                        </select> -->
+                                                        <app-skill-council-type [setSelectedCouncilType]="searchParams.SkillCouncilTypeId" (selectedCouncilType)="councilTypeSelected($event)">Loading..</app-skill-council-type>
                                                     </div>
                                                 </div>
                                             </div>
@@ -62,7 +65,7 @@
                                         <div class="col-sm-10 text-right">
                                             <a href="#" class="btn btn-outline-primary">
                                                 <i class="ft-refresh-ccw mr-half"></i> Reset </a>
-                                            <a href="#" class="btn btn-primary search-quote">
+                                            <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="searchSkillCouncils()">
                                                 <i class="ft-search mr-half"></i>Search </a>
                                         </div>
                                     </div>
@@ -82,8 +85,13 @@
                                 <option value="3">this</option>
                             </select>
                         </fieldset> -->
+                    
+                    <div class="col-sm-10 text-left">
+                        <a class="btn btn-outline" routerLink="add" style="font-weight: bold">
+                            <i class="ft-refresh-ccw mr-half"></i> ++ Add SkillCouncil </a>
+                    </div>
                     <!-- Comment : Here include listof-skill-concil components -->
-                    <app-listof-skill-council>Loading, please wait..</app-listof-skill-council>
+                    <app-listof-skill-council (selectedSkillCouncil)="parentMethod($event)">Loading, please wait..</app-listof-skill-council>
                 </div>                
             </div>
         </div>

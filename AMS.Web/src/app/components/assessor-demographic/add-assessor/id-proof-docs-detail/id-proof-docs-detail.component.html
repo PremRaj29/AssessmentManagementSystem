@@ -1,0 +1,178 @@
+<div>
+    <div>
+      <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
+      <h2 style="margin-top: 0;color:#55518a">Assessor IdProofDetail</h2>
+      <h3 style="margin-top: 0;color:#55518a"></h3>
+    </div>
+  
+    <div class="card-block">
+      <div class="card-body">
+        <div class="">
+          <div class="card form-card form-advance-block new-customer">
+            <div class="col-sm-10 text-left">
+              <a href="javascript:void(0)" class="btn btn-outline" (click)="addNewIdProofDetailToAssessor()" class="btn btn-outline" style="font-weight: bold">
+                <i class="ft-refresh-ccw mr-half"></i> ++ Add IdProofDetail </a>
+            </div>
+            <!-- Comment : Here include assessor-listof-job-role components -->
+            <div class="table-responsive pt-0 search-quote-table card-block">
+              <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                <!-- <div class="dataTables_length" id="example_length">
+                        <label>Show                     
+                            <select name="example_length" aria-controls="example" class="">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="-1">25</option>
+                            </select> entries                
+                        </label>
+                    </div> -->
+                <table id="myTable" class="table table-bordered table-striped table-cust dataTable no-footer tbl" role="grid" aria-describedby="example_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Sr. No.: activate to sort column ascending"
+                        style="width: 0px;">Sr.No</th>
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="IdProof Name: activate to sort column ascending"
+                        style="width: 0px;">IdProof Name</th>
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Unique Number: activate to sort column ascending"
+                        style="width: 0px;">Unique Number</th>
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Name On Document: activate to sort column ascending"
+                        style="width: 0px;">Name On Document</th>
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Document FileName: activate to sort column ascending"
+                        style="width: 0px;">Download Doc</th>
+                      <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending"
+                        style="width: 0px;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row" class="odd" *ngFor="let mappedIdProofDetail of assessorIdProofDetails;let indexer=index">
+                      <td class="sorting_1">{{indexer+1}}</td>
+                      <td>{{mappedIdProofDetail.IdProofName}}</td>
+                      <td>{{mappedIdProofDetail.UniqueNumber}}</td>
+                      <td>{{mappedIdProofDetail.NameOnDocument}}</td>
+                      <td>
+                          <a href="javascript:void(0)" class="btn btn-outline" (click)="downloadIdProofDoc(mappedIdProofDetail)" style="font-weight: bold">
+                            <i class="ft-refresh-ccw mr-half"></i> {{mappedIdProofDetail.DocumentFileName}} </a>
+                      </td>
+                      <td>
+                        <a href="javascript:void(0)" class="btn btn-outline" (click)="removeIdProofDetail(mappedIdProofDetail.AssessorId,mappedIdProofDetail.IdProofTypeId)" style="font-weight: bold">
+                          <i class="ft-refresh-ccw mr-half"></i> Remove </a>
+                      </td>
+                    </tr>
+                    <tr *ngIf="!assessorIdProofDetails && !isDataLoadingCompleted">
+                      <td colspan="6">Loading IdProofDetail. Please wait...</td>
+                    </tr>
+                    <tr *ngIf="assessorIdProofDetails == null && isDataLoadingCompleted">
+                      <td colspan="6" style="text-align:center;color:red">No preferred-location found !!</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 5 of 6 entries</div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a>
+                        <span>
+                            <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
+                            <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
+                        </span>
+                        <a class="paginate_button next" aria-controls="example" data-dt-idx="3" tabindex="0" id="example_next">Next</a>
+                    </div> -->
+              </div>
+            </div>
+  
+            <!-- Comment : Here include assessor-preferred-location-mapping/attach form components -->
+            <div class="card-block" *ngIf="openIdProofDetailMappingScreen">
+              <form id="form_addMapNewJobRole" class="form form-horizontal" novalidate>
+                <div class="form-advance-block">
+                  <div class="card collapse-icon accordion-icon-rotate">
+                    <div class="card-block">
+                      <div class="card-body">
+                        <div class="">
+                          <hr />
+                          <div class="form-group row">
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-5 col-lg-7" style="text-decoration:underline">
+                              <h5> Add New IdProofDetail For Assessor </h5>
+                            </label>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-lg-5 label-control" style="color:green" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+                          </div>
+                          <!-- Comment : Here "IdProofDoc Type" Component -->
+                          <div class="form-group row">
+                            <label class="col-md-4 col-lg-3 label-control">IdProof Doc-Type</label>
+                            <div class="col-md-6 col-lg-5">
+                                <app-id-proof-document-type [setSelectedIdProofDocTypeId]="assessorIdProof.IdProofTypeId" (selectedIdProofDocTypeId)="idProofDocTypeChanged($event)">Loading..</app-id-proof-document-type>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && (assessorIdProof.IdProofTypeId == null || assessorIdProof.IdProofTypeId == 0))">
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-4 col-lg-5 validationMsg">
+                              <span class="error">IdProof Doc-Type is required</span>
+                            </div>
+                          </div>
+                          <!-- Comment : Here "UniqueNumber On Document" Component -->
+                          <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Unique Number</label>
+                              <div class="col-md-6 col-lg-5">
+                                  <input type="text" name="txt_IdProofDocUniqueNumber" id="txt_IdProofDocUniqueNumber" [(ngModel)]="assessorIdProof.UniqueNumber" 
+                                  class="form-control field-sm" placeholder="" ng-maxlength="30" maxlength="30" #txt_IdProofDocUniqueNumber="ngModel">
+                              </div>                            
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && assessorIdProof.UniqueNumber == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-4 col-lg-5 validationMsg">
+                                <span class="error">Unique number of document is required</span>
+                              </div>
+                          </div>
+                          <!-- Comment : Here "Name On Document" Component -->
+                          <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Name On Document</label>
+                              <div class="col-md-6 col-lg-5">
+                                  <input type="text" name="txt_IdProofDocNameOnDocument" id="txt_IdProofDocNameOnDocument" [(ngModel)]="assessorIdProof.NameOnDocument" 
+                                  class="form-control field-sm" placeholder="" ng-maxlength="200" maxlength="200" #txt_IdProofDocNameOnDocument="ngModel">
+                              </div>                            
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && assessorIdProof.NameOnDocument == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-4 col-lg-5 validationMsg">
+                                <span class="error">Name on id-proof-document is required</span>
+                              </div>
+                          </div>
+                          <!-- Comment : Here "Upload Document File" Control -->
+                          <div class="form-group row">
+                              <label class="col-md-4 col-lg-3 label-control">Upload Document</label>
+                              <div class="col-md-6 col-lg-5">
+                                  <input type="file" name="file_IdProofDocumentFile" id="file_IdProofDocumentFile" [value]="null" 
+                                  class="form-control field-sm" accept=".doc,.docx,.dot,.dotx,.pdf,.html,.htm" (change)="fileUploadEvent($event)" required>
+                              </div>                            
+                          </div>
+                          <div class="form-group row" *ngIf="(formSubmitted && assessorIdProof.UploadedIdProofDocFile == null)">
+                              <label class="col-md-4 col-lg-3 label-control"></label>
+                              <div class="col-md-4 col-lg-5 validationMsg">
+                                <span class="error">Id-proof-document file is required</span>
+                              </div>
+                          </div>
+                          <div class="form-group row">
+                            <!-- {{assessorIdProof | json }} -->
+                            <label class="col-md-4 col-lg-3 label-control"></label>
+                            <div class="col-md-6 col-lg-5 text-right">
+                              <div class="field-lg">
+                                <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetFormDetails()">
+                                  <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; submitNewIdProofDetailMapping();">
+                                  <i class="ft-search mr-half"></i>Submit </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

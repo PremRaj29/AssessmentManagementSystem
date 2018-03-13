@@ -24,11 +24,13 @@ namespace AMS.API.Contracts
         OperationStatus AddIdProofDetail(AssessorIdProofDetail data);
 
         /// <summary>
-        /// /// Remove exisitng Assessor IdProofDetails based on and @AssessorId
+        /// Remove exisitng Assessor IdProofDetails based on and @AssessorId,IdProoftypeId like "AadharCard, DL etc"
         /// </summary>
-        /// <param name="assessorIdId"></param>
+        /// <param name="assessorId"></param>
+        /// <param name="idProofTypeId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        OperationStatus RemoveIdProofDetail(Int64 id, Int64 assessorId);
+        OperationStatus RemoveIdProofDetail(Int64 assessorId, int idProofTypeId, Int64 id);
 
         /// <summary>
         /// Modify Assessor IdProofDetails data

@@ -12,6 +12,8 @@ import { JobRole } from '../../models/manage-job-role/job-role';
 import { OperationStatus } from '../../models/shared/operation-status';
 import { JobRoleResponse } from '../../models/manage-job-role/job-role-response';
 
+import {environment} from '../../../environments/environment';
+
 // import Domain class
 
 //#endregion
@@ -23,7 +25,7 @@ export class JobRoleService {
 
   //#region global level propertie/variables/models declaration & initlizations
 
-  private jobRoleRequestUrl: string = 'http://localhost/AMS.Services/api/SkillCouncil/';
+  private jobRoleRequestUrl: string = environment.apiUrl + 'SkillCouncil/';
   private requestUrl: string = null;
   private requestOptions: RequestOptions;
 
@@ -38,7 +40,7 @@ export class JobRoleService {
   getJobRoleDetails(jobRoleId: number,skillCouncilId?: number) : Observable<JobRoleResponse>
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/SkillCouncil/2/JobRole/127
+    //reference-url : http://{Path}/AMS.Services/SkillCouncil/2/JobRole/127
 
     // comment : here manipulate url string
     this.requestUrl  = this.jobRoleRequestUrl + `${skillCouncilId || '0'}/JobRole/${jobRoleId || ''}`;
@@ -55,7 +57,7 @@ export class JobRoleService {
   searchJobRoles(searchParams: SearchJobRolesRequestParams) : Observable<JobRoleResponse>
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/SkillCouncil/JobRole/Search?Code=TEST
+    //reference-url : http://{Path}}/AMS.Services/SkillCouncil/JobRole/Search?Code=TEST
 
     // comment : here manipulate url string
     this.requestUrl  = this.jobRoleRequestUrl +`JobRole/Search?Code=${searchParams.Code || ''}&Name=${searchParams.Name || ''}&SkillCouncilTypeId=${searchParams.SkillCouncilTypeId}&SkillCouncilId=${searchParams.SkillCouncilId}`;
@@ -72,7 +74,7 @@ export class JobRoleService {
   addJobRole(jobRole: JobRole): Observable<OperationStatus> 
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/SkillCouncil/5/JobRole
+    //reference-url : http://{Path}}/AMS.Services/api/SkillCouncil/5/JobRole
 
     // comment : here manipulate url string
     this.requestUrl = this.jobRoleRequestUrl +`${jobRole.SkillCouncilId || ''}/JobRole`;
@@ -91,7 +93,7 @@ export class JobRoleService {
   modifyJobRole(jobRole: JobRole): Observable<OperationStatus> 
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/SkillCouncil/5/JobRole/127
+    //reference-url : http://{Path}/AMS.Services/api/SkillCouncil/5/JobRole/127
 
     // comment : here manipulate url string
     this.requestUrl = this.jobRoleRequestUrl +`${jobRole.SkillCouncilId || ''}/JobRole/`+ `${jobRole.Id || ''}`;
@@ -110,7 +112,7 @@ export class JobRoleService {
   deleteJobRole(jobRole: JobRole): Observable<OperationStatus> 
   {
     debugger;
-    //reference-url : http://localhost/AMS.Services/api/SkillCouncil/5/JobRole/127
+    //reference-url : http://{Path}/AMS.Services/api/SkillCouncil/5/JobRole/127
 
     // comment : here manipulate url string
     this.requestUrl = this.jobRoleRequestUrl +`${jobRole.SkillCouncilId || ''}/JobRole/`+ `${jobRole.Id || ''}`;

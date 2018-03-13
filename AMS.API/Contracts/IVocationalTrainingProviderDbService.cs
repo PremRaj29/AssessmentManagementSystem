@@ -36,5 +36,11 @@ namespace AMS.API.Contracts
         /// <param name="data"></param>
         /// <returns></returns>
         OperationStatus UpdateVocationalTrainingProvider(VocationalTrainingProvider data);
+
+        /// <summary>
+        /// Return list of VTP's based on supplied Search-Parameters
+        /// </summary>
+        /// <returns></returns>
+        VocationalTrainingProviderResponse SearchVtps(string vtpCode, string vtpName);
     }
 }

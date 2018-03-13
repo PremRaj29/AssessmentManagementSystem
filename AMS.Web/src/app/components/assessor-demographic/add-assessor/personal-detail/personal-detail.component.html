@@ -1,0 +1,106 @@
+<div>
+  <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+  <h2 style="margin-top: 0;color:#55518a;text-decoration: underline">Assessor Personal Details</h2>
+  <h3 style="margin-top: 0;color:#55518a"></h3>
+
+  <div class="card-block">
+    <div class="card-body">
+      <div class="">
+        <fieldset [disabled]="disableFormSubmit == 1">
+          <div class="form-group row">
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-6 label-control" style="color:green;text-align: left;" *ngIf="formSubmitted && isFormDataSubmissionCompleted != null && !isFormDataSubmissionCompleted">Submitting data. Please wait...</label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Assessor Name</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_AssessorName" id="txt_AssessorName" [(ngModel)]="assessorPersonalDetail.Name" class="form-control field-sm"
+                placeholder="" ng-maxlength="200" maxlength="200" #txt_AssessorName="ngModel" required>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="(formSubmitted && !txt_AssessorName.valid)">
+            <label class="col-md-4 col-lg-3 label-control"></label>
+            <div class="col-md-6 col-lg-3">
+              <span class="error">Assessor name is required</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control" for="projectinput1">Gender</label>
+            <div class="col-md-6">
+              <div class="input-group">
+              </div>
+              <div class="radio-toggle">
+                <div class="btn-radio multiple-state" id="broker">
+                  <input type="radio" name="radio_Gender" id="radio_Gender1" value="M" [(ngModel)]="assessorPersonalDetail.Gender" #radio_Gender="ngModel"
+                    required>
+                  <label for="radio_Gender1"> Male</label>
+                </div>
+                <div class="btn-radio multiple-state" id="customer">
+                  <input type="radio" name="radio_Gender" id="radio_Gender2" value="F" [(ngModel)]="assessorPersonalDetail.Gender" #radio_Gender="ngModel"
+                    required>
+                  <label for="radio_Gender2">Female</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="(formSubmitted && !radio_Gender.valid)">
+            <label class="col-md-4 col-lg-3 label-control"></label>
+            <div class="col-md-6 col-lg-3">
+              <span class="error">Gender is required</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">DOB</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_DOB" id="txt_DOB" [(ngModel)]="assessorPersonalDetail.DOB" class="form-control field-sm" placeholder="dd/mm/yyyy"
+                ng-maxlength="10" maxlength="10" #txt_DOB="ngModel" required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control" for="projectinput1">Marital Status</label>
+            <div class="col-md-6">
+              <div class="input-group">
+              </div>
+              <div class="radio-toggle">
+                <div class="btn-radio multiple-state" id="broker">
+                  <input type="radio" name="radio_MaritalStaus" id="radio_MaritalStaus1" [value]="true" [(ngModel)]="assessorPersonalDetail.MaritalStatus">
+                  <label for="radio_MaritalStaus1"> Married</label>
+                </div>
+                <div class="btn-radio multiple-state" id="customer">
+                  <input type="radio" name="radio_MaritalStaus" id="radio_MaritalStaus2" [value]="false" [(ngModel)]="assessorPersonalDetail.MaritalStatus">
+                  <label for="radio_MaritalStaus2">UnMarried</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Father Name</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_FatherName" id="txt_FatherName" [(ngModel)]="assessorPersonalDetail.FatherName" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_FatherName="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-3 label-control">Mother Name</label>
+            <div class="col-md-6 col-lg-5">
+              <input type="text" name="txt_MotherName" id="txt_MotherName" [(ngModel)]="assessorPersonalDetail.MotherName" class="form-control field-sm"
+                placeholder="" ng-maxlength="50" maxlength="50" #txt_MotherName="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-4 label-control"></label>
+            <div class="col-md-6 col-lg-3 text-right">
+              <div class="field-lg">
+                <a href="javascript:void(0)" class="btn btn-outline-primary" (click)="resetFormDetails()">
+                  <i class="ft-refresh-ccw mr-half"></i> Reset </a>
+                <a href="javascript:void(0)" class="btn btn-primary search-quote" (click)="formSubmitted = true; submitAssessorPersonalDetails();">
+                  <i class="ft-search mr-half"></i>Submit </a>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>

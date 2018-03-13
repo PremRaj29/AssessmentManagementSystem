@@ -11,7 +11,6 @@ namespace AMS.API.DTO.Assessor
     {
         public Int64 Id { get; set; }
 
-        [JsonIgnore]
         public Int64 AssessorId { get; set; }
 
         [Required]

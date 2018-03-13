@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AMS.API.DTO.BatchAllocation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,5 +34,7 @@ namespace AMS.API.DTO.BatchMaster
         /// All other batch details except BatchId and BatchName
         /// </summary>
         public BatchDetail BatchDetails { get; set; }
+
+        public BatchAllocationDetail BatchAllocationDetails { get; set; }
     }
 }

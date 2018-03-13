@@ -28,7 +28,7 @@ namespace AMS.API.Contracts
         /// </summary>
         /// <param name="assessorIdId"></param>
         /// <returns></returns>
-        OperationStatus RemoveJobRole(Int64 id, Int64 assessorId);
+        OperationStatus RemoveJobRole(Int64 assessorId, int jobRoleId, Int64 id);
 
         /// <summary>
         /// Modify Assessor JobRoles data

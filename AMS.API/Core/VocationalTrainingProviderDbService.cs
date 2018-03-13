@@ -203,6 +203,58 @@ namespace AMS.API.Core
 
         #endregion
 
+        #region Comment : Here Custom Methods
+
+        /// <summary>
+        /// Return list of VTP's based on supplied Search-Parameters
+        /// </summary>
+        /// <returns></returns>
+        VocationalTrainingProviderResponse IVocationalTrainingProviderDbService.SearchVtps(string vtpCode, string vtpName)
+        {
+            VocationalTrainingProviderResponse vocationalTrainingProviderResponse = new VocationalTrainingProviderResponse();
+
+            try
+            {
+                var dbSet = GetDbConnector().LoadDataSet("SearchVTPs", QueryCommandType.StoredProcedure,
+                                            new List<System.Data.IDbDataParameter>
+                                            {
+                                                new SqlParameter() { ParameterName = "@VTPCode", Value = vtpCode, SqlDbType = SqlDbType.VarChar, Size=10 },
+                                                new SqlParameter() { ParameterName = "@VTPName", Value = vtpName, SqlDbType = SqlDbType.VarChar, Size=500 },
+                                            });
+
+                //Comment : Here fill & return generic list from DbSet
+                var listVtp = new List<VocationalTrainingProvider>();
+                if (dbSet != null && dbSet.Tables.Count > 0)
+                {
+                    foreach (DataRow dataRow in dbSet.Tables[0].Rows)
+                    {
+                        listVtp.Add(
+                            new VocationalTrainingProvider()
+                            {
+                                Id = Convert.ToInt32(dataRow["VTPId"]),
+                                Code = dataRow["Code"].ToString(),
+                                Name = dataRow["Name"].ToString(),
+                                Description = dataRow["Description"].ToString(),
+                                IsActive = Convert.ToBoolean((dataRow["IsActive"] == DBNull.Value || dataRow["IsActive"] == null) ? 0 : dataRow["IsActive"])
+                            });
+                    }
+                }
+
+                //assign fecthed list
+                vocationalTrainingProviderResponse.VocationalTrainingProvider = listVtp;
+                vocationalTrainingProviderResponse.OperationStatus = new OperationStatus { ServiceName = "SearchVtps", ServiceMethod = "Get", RequestProcessed = true, RequestSuccessful = true };
+            }
+            catch (Exception ex)
+            {
+                vocationalTrainingProviderResponse.OperationStatus = new OperationStatus { Messages = new List<Message>() { new Message() { DTOName = "VTP", DTOProperty = "", MessageType = MessageType.SystemError, Text = ex.Message } }, RequestProcessed = true, RequestSuccessful = false };
+
+            }
+
+            return vocationalTrainingProviderResponse;
+        }
+
+        #endregion
+
         #endregion
 
         #region Private Methods

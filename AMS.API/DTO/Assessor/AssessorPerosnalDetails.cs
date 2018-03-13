@@ -9,7 +9,6 @@ namespace AMS.API.DTO.Assessor
 {
     public class AssessorPersonalDetail
     {
-        [JsonIgnore]
         public Int64 AssessorId { get; set; }
 
         [Required]
@@ -19,9 +18,9 @@ namespace AMS.API.DTO.Assessor
         [Required]
         public char Gender { get; set; }
 
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
-        public bool MaritalStatus { get; set; }
+        public bool? MaritalStatus { get; set; }
 
         [StringLength(50)]
         public string FatherName { get; set; }

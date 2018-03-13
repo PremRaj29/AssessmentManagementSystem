@@ -28,7 +28,7 @@ namespace AMS.API.Contracts
         /// </summary>
         /// <param name="assessorId"></param>
         /// <returns></returns>
-        OperationStatus RemoveAssessor(int assessorId);
+        OperationStatus RemoveAssessor(Int64 assessorId);
 
         /// <summary>
         /// Modify Assessor data related in ALL categories like Personal, JobRoles, PrefLocation etc

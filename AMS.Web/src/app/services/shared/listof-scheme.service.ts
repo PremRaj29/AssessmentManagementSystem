@@ -9,6 +9,7 @@ import { SchemeResponse } from '../../models/manage-scheme/scheme-response';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 // import Domain class
 
@@ -21,7 +22,7 @@ export class ListofSchemeService {
   
     //#region global level propertie/variables/models declaration & initlizations
   
-    private schemeRequestUrl: string = 'http://localhost/AMS.Services/api/Scheme/';
+    private schemeRequestUrl: string = environment.apiUrl + 'Scheme/';
     private requestUrl: string = null;
     private requestOptions: RequestOptions;
   
@@ -36,7 +37,7 @@ export class ListofSchemeService {
     getSchemes(schemeId?: number) : Observable<SchemeResponse>
     {
       debugger;
-      //reference-url : http://localhost/AMS.Services/Scheme/2
+      //reference-url : http://{Path}/AMS.Services/Scheme/2
   
       // comment : here manipulate url string
       this.requestUrl  = this.schemeRequestUrl + `${schemeId || '0'}`;

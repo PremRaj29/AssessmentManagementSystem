@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost/AMS.Services/api/',
+  apiUrl: 'http://192.168.1.56/AMS.Services/api/',
 };

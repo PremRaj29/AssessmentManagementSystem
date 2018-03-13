@@ -9,9 +9,11 @@ import { SearchAssessorParams } from '../../../models/batch-master/search-assess
 
 //import required components
 import {BatchDetailsComponent} from './batch-details/batch-details.component';
+import {AssessorListComponent } from './assessor-list/assessor-list.component';
 
 // import required services for this component
-import { BatchMasterService } from '../../../services/batch-master/batch-master.service';
+import { BatchAllocationService } from '../../../services/batch-master/batch-allocation.service';
+import { SearchBatchMatchingAssessorRequestParams } from '../../../models/batch-allocation/search-batch-matching-assessor-request-params';
 
 //#endregion
 
@@ -20,7 +22,8 @@ import { BatchMasterService } from '../../../services/batch-master/batch-master.
 @Component({
   selector: 'app-batch-allocation',
   templateUrl: './batch-allocation.component.html',
-  styleUrls: ['./batch-allocation.component.css']
+  styleUrls: ['./batch-allocation.component.css'],
+  providers:[BatchAllocationService]
 })
 export class BatchAllocationComponent implements OnInit {
 
@@ -40,8 +43,9 @@ export class BatchAllocationComponent implements OnInit {
 
   // get acess to Child-component
   @ViewChild(BatchDetailsComponent) private childCompBatchDetailsComponent: BatchDetailsComponent;
+  @ViewChild(AssessorListComponent) private childCompAssessorListComponent: AssessorListComponent;
 
-  constructor(private batchMasterService: BatchMasterService) { }
+  constructor(private batchAllocationService: BatchAllocationService) { }
 
   ngOnInit() {
   }
@@ -50,29 +54,31 @@ export class BatchAllocationComponent implements OnInit {
 
   public searchBatchMaster() 
   {
-    //debugger;
+    debugger;
     if(this.batchSearchedValue != null && this.batchSearchedValue != '')
     {
+      this.isDataLoadingCompleted = false;
 
       this.childCompBatchDetailsComponent.loadBatchMasterDetails(
         (this.batchSearchType == 1 ? this.batchSearchedValue: null)
         ,(this.batchSearchType == 2 ? this.batchSearchedValue: null)
       );
-
-      // if(this.batchSearchType == 1)
-      // {
-      //   this.childCompBatchDetailsComponent.loadBatchMasterDetails(this.batchSearchedValue,null);
-      // }
-      // else if(this.batchSearchType == 2)
-      // {
-      //   this.childCompBatchDetailsComponent.loadBatchMasterDetails(this.batchSearchedValue,null);
-      // }
     }
   }
 
   public searchAssessorForBatchAllocation()
   {
+    debugger;
+    if(this.searchAssessorParams.AssessmentDate != null && this.searchAssessorParams.AssessmentTiming != null)
+    {
+      let searchBatchAssessorParams = new SearchBatchMatchingAssessorRequestParams();
+      searchBatchAssessorParams.BatchId = this.batchSearchedValue;    //need to check in case of "Search BatchName case" ??
+      searchBatchAssessorParams.AssessmentDate = this.searchAssessorParams.AssessmentDate;
+      searchBatchAssessorParams.AssessmentTiming = this.searchAssessorParams.AssessmentTiming;
+      searchBatchAssessorParams.AssessorName = this.searchAssessorParams.AssessorName;
 
+      this.childCompAssessorListComponent.searchBatchMatchingAssessor(searchBatchAssessorParams);
+    }
   }
 
   public resetAssessorSearchPanel()
@@ -91,7 +97,9 @@ export class BatchAllocationComponent implements OnInit {
 
   public parentMethod(childData: any) {
     this.searchedBatchMasterId = childData;
-    alert('Searched BatchMasterId : '+ this.searchedBatchMasterId);
+
+    this.isDataLoadingCompleted = true;
+    //alert('Searched BatchMasterId : '+ this.searchedBatchMasterId);
   }
 
 
